@@ -1,6 +1,3 @@
 let gulp = require('gulp');
-let gutil = require('gulp-util');
 
-gulp.task('default', () => {
-    aaa();
-});
+gulp.task('default', ['sass']);

@@ -26,7 +26,18 @@
   },
   "homepage": "https://github.com/partyk/gulp-devstack#readme",
   "devDependencies": {
+    "cssnano": "^3.10.0",
+    "deepmerge": "^2.0.1",
     "gulp": "^3.9.1",
+    "gulp-notify": "^3.0.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-postcss": "^7.0.0",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemap": "^1.0.1",
+    "gulp-sourcemaps": "^2.6.1",
+    "path": "^0.12.7",
+    "pixrem": "^4.0.1",
+    "postcss-discard-duplicates": "^2.1.0",
     "require-dir": "^0.3.2"
   }
 }
