@@ -1,0 +1,32 @@
+{
+  "name": "gulp-devstack",
+  "version": "1.0.0",
+  "description": "Gulp DevStack for develop.",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/partyk/gulp-devstack.git"
+  },
+  "keywords": [
+    "Gulp",
+    "SASS",
+    "LESS",
+    "Babel",
+    "JavaScript",
+    "DevStack",
+    "FrontEnd"
+  ],
+  "author": "Bohdan Partyk <bohdan@partyk.cz>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/partyk/gulp-devstack/issues"
+  },
+  "homepage": "https://github.com/partyk/gulp-devstack#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "require-dir": "^0.3.2"
+  }
+}
