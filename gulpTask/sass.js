@@ -11,21 +11,21 @@ let sourcemaps = require('gulp-sourcemaps');
 
 
 gulp.task('sass', () => {
-    
-    //callBack error
-    let onError = function(error) {
-		notify.onError({
-			title: 'Sass error!',
-			message: '<%= error.message %>',
-			sound: 'Beep',
-		})(error);
 
-		return this.emit('end');
-	};
+    //callBack error
+    let onError = function (error) {
+        notify.onError({
+            title: 'Sass error!',
+            message: '<%= error.message %>',
+            sound: 'Beep',
+        })(error);
+
+        return this.emit('end');
+    };
 
     //nastavim config pro sass stream
     let settings = {
-		postCssPlugins: [
+        postCssPlugins: [
             require('postcss-discard-duplicates')(),
             require('pixrem')({ rootValue: config.fontSize }), // rem -> px fallback, defaultni hodnota pro vypocet je 10px
             require('autoprefixer')({ browsers: config.browser }), // pridani prefixu
@@ -35,8 +35,8 @@ gulp.task('sass', () => {
             // require('postcss-pseudoelements')(),
             // require('postcss-vmin')(),
         ],
-		isProduction: isProduction()
-	};
+        isProduction: isProduction()
+    };
 
     //pridam do postCssPluginy pro produkci
     if (settings.isProduction) {
@@ -47,12 +47,12 @@ gulp.task('sass', () => {
 
     //vytvorim cestu + filtr na soubory
     let src = path.format({
-        dir : config.src.sass.src,
+        dir: config.src.sass.src,
         base: '**/*.+(scss|sass)'
     });
 
-    let stream = gulp.src( src );
-    
+    let stream = gulp.src(src);
+
     stream
         //nastavim plumber a v pripade chyby volam callback onError
         .pipe(plumber({
@@ -60,24 +60,24 @@ gulp.task('sass', () => {
         }))
         //sourcemaps init
         .pipe(
-            settings.isProduction
+        settings.isProduction
             ? gutil.noop()
             : sourcemaps.init()
         )
         //kompilace sass
         .pipe(sass())
         //postcss
-        .pipe( postcss( settings.postCssPlugins ) )
+        .pipe(postcss(settings.postCssPlugins))
         //vygeneruji sourcemaps
         .pipe(
-            settings.isProduction
+        settings.isProduction
             ? gutil.noop()
-            : sourcemaps.write('./'),
+            : sourcemaps.write('./')
         )
         //zastavim plumber
         .pipe(plumber.stop())
         //vygeneruji CSS soubory
         .pipe(gulp.dest(config.dist.style));
-    
+
     return stream;
 });
