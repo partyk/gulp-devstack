@@ -1,45 +1,97 @@
 let path = require('path');
 
+let dirName = {
+    root: '/',
+    temp: 'temp',
+    app: 'app',
+    src: 'src',
+    dist: 'dist',
+    scripts: 'js',
+    styles: 'css',
+    images: 'images',
+    fonts: 'fonts',
+    extends: 'extends'
+}
+
 let basePath = {
-	src: path.resolve(__dirname, 'app'),
-	dest: path.resolve(__dirname, 'dist'),
-    dist: path.resolve(__dirname, 'dist'),
-    temp: path.resolve(__dirname, 'temp', 'gulp')
+    app: path.resolve(__dirname, dirName.app),
+    dist: path.resolve(__dirname, dirName.dist),
+    temp: path.resolve(__dirname, dirName.temp, 'gulp'),
+    nodeModule: path.resolve(__dirname, 'node_modules'),
+    bowerComponents: path.resolve(__dirname, 'bower_components'),
 };
 
-let src = {
-    less: path.resolve(basePath.src, 'less'),
-    sass : {
-        root: path.resolve(basePath.src, 'sass'),
-        src: path.resolve(basePath.src, 'sass', 'src')
+let publicPath = {
+    root: '/',
+    dist: path.resolve(dirName.dist),
+    styles: {
+        root: path.resolve(dirName.dist, dirName.styles),
+        extends: path.resolve(dirName.dist, dirName.styles, dirName.extends),
     },
-    scripts: path.resolve(basePath.src, 'js'),
-    images:path.resolve(basePath.src, 'images'),
-};
+    scripts: {
+        root: path.resolve(dirName.dist, dirName.scripts),
+        extends: path.resolve(dirName.dist, dirName.scripts, dirName.extends),
+    }
+}
 
-let dest = {
-    style: path.resolve(basePath.dest, 'css'),
-    scripts: path.resolve(basePath.dest, 'js'),
-	images: path.resolve(basePath.dest, 'images'),
+let app = {
+    less: {
+        root: path.resolve(basePath.app, 'less'),
+        src: path.resolve(basePath.app, 'less', dirName.src)
+    },
+    sass: {
+        root: path.resolve(basePath.app, 'sass'),
+        src: path.resolve(basePath.app, 'sass', dirName.src)
+    },
+    scripts: {
+        root: path.resolve(basePath.app, dirName.scripts),
+        src: path.resolve(basePath.app, dirName.scripts, dirName.src),
+        extends: path.resolve(basePath.app, dirName.scripts, dirName.extends)
+    },
+    images: {
+        root: path.resolve(basePath.app, dirName.root)
+    }
 };
 
 let dist = {
-    style: path.resolve(basePath.dist, 'css'),
-    scripts: path.resolve(basePath.dist, 'js'),
-	images: path.resolve(basePath.dist, 'images'),
+    styles: {
+        root: path.resolve(basePath.dist, dirName.styles),
+        extends: path.resolve(basePath.dist, dirName.styles, dirName.extends)
+    },
+    scripts: {
+        root: path.resolve(basePath.dist, dirName.scripts),
+        extends: path.resolve(basePath.dist, dirName.scripts, dirName.extends)
+    },
+    images: {
+        root: path.resolve(basePath.dist, dirName.images),
+    }
+};
+
+let webpack = {
+	stats: {
+		colors: true,
+		hash: false,
+		timings: true,
+		assets: true,
+		chunks: false,
+		chunkModules: false,
+		modules: false,
+		children: true,
+		version: false,
+	},
 };
 
 //podpora prohlizece
-let browser = ['> 2% in CZ', 'last 3 version', 'ios >= 7', 'Explorer >= 10'];
+let browser = ['> 2% in CZ', 'last 3 version', 'iOs >= 7', 'Explorer >= 10'];
 
 //velikost vychoziho pisma
 let fontSize = 10;
 
 module.exports = {
-	basePath: basePath,
-	src: src,
-    dest: dest,
-	dist: dist,
+    basePath: basePath,
+    app: app,
+    dist: dist,
+    webpack: webpack,
     browser: browser,
     fontSize: fontSize
 };

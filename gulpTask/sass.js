@@ -47,7 +47,7 @@ gulp.task('sass', () => {
 
     //vytvorim cestu + filtr na soubory
     let src = path.format({
-        dir: config.src.sass.src,
+        dir: config.app.sass.root,
         base: '**/*.+(scss|sass)'
     });
 
@@ -77,7 +77,7 @@ gulp.task('sass', () => {
         //zastavim plumber
         .pipe(plumber.stop())
         //vygeneruji CSS soubory
-        .pipe(gulp.dest(config.dist.style));
+        .pipe(gulp.dest(config.dist.styles.root));
 
     return stream;
 });
