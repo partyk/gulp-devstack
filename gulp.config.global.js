@@ -10,7 +10,8 @@ let dirName = {
     styles: 'css',
     images: 'images',
     fonts: 'fonts',
-    extends: 'extends'
+    extends: 'extends',
+    static: 'static'
 }
 
 let basePath = {
@@ -46,10 +47,12 @@ let app = {
     scripts: {
         root: path.resolve(basePath.app, dirName.scripts),
         src: path.resolve(basePath.app, dirName.scripts, dirName.src),
-        extends: path.resolve(basePath.app, dirName.scripts, dirName.extends)
+        extends: path.resolve(basePath.app, dirName.scripts, dirName.extends),
+        static: path.resolve(basePath.app, dirName.scripts, dirName.static)
     },
     images: {
-        root: path.resolve(basePath.app, dirName.root)
+        root: path.resolve(basePath.app, dirName.images),
+        extends: path.resolve(basePath.dist, dirName.images, dirName.extends)
     }
 };
 
@@ -60,10 +63,12 @@ let dist = {
     },
     scripts: {
         root: path.resolve(basePath.dist, dirName.scripts),
-        extends: path.resolve(basePath.dist, dirName.scripts, dirName.extends)
+        extends: path.resolve(basePath.dist, dirName.scripts, dirName.extends),
+        static: path.resolve(basePath.app, dirName.scripts, dirName.static)
     },
     images: {
         root: path.resolve(basePath.dist, dirName.images),
+        extends: path.resolve(basePath.dist, dirName.images, dirName.extends)
     }
 };
 
@@ -87,11 +92,20 @@ let browser = ['> 2% in CZ', 'last 3 version', 'iOs >= 7', 'Explorer >= 10'];
 //velikost vychoziho pisma
 let fontSize = 10;
 
+//spojovani js souboru
+let concatJs = {
+    dependencyJs : {
+        name: "dependency.js",
+        files: []
+    }
+}
+
 module.exports = {
     basePath: basePath,
     app: app,
     dist: dist,
     webpack: webpack,
     browser: browser,
-    fontSize: fontSize
+    fontSize: fontSize,
+    concatJs: concatJs
 };
