@@ -4,22 +4,20 @@ let consoleLog = require('./helpers/consoleLog');
 
 let path = require('path');
 let gulp = require('gulp');
-let sass = require('gulp-sass');
+let less = require('gulp-less');
 let gutil = require('gulp-util');
 let postcss = require('gulp-postcss');
 let notify = require('gulp-notify');
 let plumber = require('gulp-plumber');
 let sourcemaps = require('gulp-sourcemaps');
 
-
-gulp.task('sass', () => {
-
-    consoleLog.info('SASS compile');
+gulp.task('less', () => {
+    consoleLog.info('LESS compile');
 
     //callBack error
     let onError = function (error) {
         notify.onError({
-            title: 'SASS error!',
+            title: 'LESS error!',
             message: '<%= error.message %>',
             sound: 'Beep',
         })(error);
@@ -51,8 +49,8 @@ gulp.task('sass', () => {
 
     //vytvorim cestu + filtr na soubory
     let src = path.format({
-        dir: config.app.sass.root,
-        base: '**/*.+(scss|sass)'
+        dir: config.app.less.root,
+        base: '**/*.+(less)'
     });
 
     let stream = gulp.src(src);
@@ -69,7 +67,7 @@ gulp.task('sass', () => {
                 : sourcemaps.init()
         )
         //kompilace sass
-        .pipe(sass())
+        .pipe(less())
         //postcss
         .pipe(postcss(settings.postCssPlugins))
         //vygeneruji sourcemaps
@@ -84,4 +82,5 @@ gulp.task('sass', () => {
         .pipe(gulp.dest(config.dist.styles.root));
 
     return stream;
+
 });

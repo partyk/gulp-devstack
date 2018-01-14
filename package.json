@@ -38,6 +38,7 @@
     "gulp-clean": "^0.4.0",
     "gulp-concat": "^2.6.1",
     "gulp-imagemin": "^4.1.0",
+    "gulp-less": "^3.4.0",
     "gulp-notify": "^3.0.0",
     "gulp-plumber": "^1.1.0",
     "gulp-postcss": "^7.0.0",
@@ -48,6 +49,7 @@
     "imagemin-pngquant": "^5.0.1",
     "path": "^0.12.7",
     "pixrem": "^4.0.1",
+    "postcss-csscomb": "^1.0.2",
     "postcss-discard-duplicates": "^2.1.0",
     "require-dir": "^0.3.2",
     "webpack": "^3.10.0"
