@@ -1,5 +1,7 @@
 let config = require('./helpers/getConfig');
 let isProduction = require('./helpers/isProduction');
+let consoleLog = require('./helpers/consoleLog');
+
 let path = require('path');
 let gulp = require('gulp');
 let sass = require('gulp-sass');
@@ -11,6 +13,8 @@ let sourcemaps = require('gulp-sourcemaps');
 
 
 gulp.task('sass', () => {
+
+    consoleLog.info('SASS compile');
 
     //callBack error
     let onError = function (error) {
@@ -34,12 +38,11 @@ gulp.task('sass', () => {
             // require('postcss-opacity')(),
             // require('postcss-pseudoelements')(),
             // require('postcss-vmin')(),
-        ],
-        isProduction: isProduction()
+        ]
     };
 
     //pridam do postCssPluginy pro produkci
-    if (settings.isProduction) {
+    if (isProduction()) {
         settings.postCssPlugins = settings.postCssPlugins.concat([
             require('cssnano')()
         ]);
@@ -60,9 +63,9 @@ gulp.task('sass', () => {
         }))
         //sourcemaps init
         .pipe(
-        settings.isProduction
-            ? gutil.noop()
-            : sourcemaps.init()
+            isProduction()
+                ? gutil.noop()
+                : sourcemaps.init()
         )
         //kompilace sass
         .pipe(sass())
@@ -70,9 +73,9 @@ gulp.task('sass', () => {
         .pipe(postcss(settings.postCssPlugins))
         //vygeneruji sourcemaps
         .pipe(
-        settings.isProduction
-            ? gutil.noop()
-            : sourcemaps.write('./')
+            isProduction()
+                ? gutil.noop()
+                : sourcemaps.write('./')
         )
         //zastavim plumber
         .pipe(plumber.stop())
