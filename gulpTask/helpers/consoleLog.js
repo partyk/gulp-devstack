@@ -4,17 +4,17 @@ let consoleLog;
 consoleLog = {
     info: (text, reverse = false) => {
         if (reverse) {
-            gutil.log(gutil.colors.black(gutil.colors.bgYellow('= ' + text + ' =')));
+            gutil.log(gutil.colors.bgMagenta(gutil.colors.white('= ' + text + ' =')));
         } else {
-            gutil.log(gutil.colors.yellow(text));
+            gutil.log(gutil.colors.magenta(text));
         }
     },
 
-    alert : (text, reverse = false) => {
+    warn : (text, reverse = false) => {
         if (reverse) {
-            gutil.log(guttil.colors.bgRed(gutil.colors.white('= ' + text + ' =')));
+            gutil.log(guttil.colors.bgYellow(gutil.colors.black('= ' + text + ' =')));
         } else {
-            gutil.log(gutil.colors.bgRed(text));
+            gutil.log(gutil.colors.yellow(text));
         }
     }  
 };

@@ -16,7 +16,7 @@ gulp.task('imagemin', function() {
      //callBack error
      let onError = function (error) {
         notify.onError({
-            title: 'Concat error!',
+            title: 'Image error!',
             message: '<%= error.message %>',
             sound: 'Beep',
         })(error);

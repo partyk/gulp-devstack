@@ -52,6 +52,7 @@
     "postcss-csscomb": "^1.0.2",
     "postcss-discard-duplicates": "^2.1.0",
     "require-dir": "^0.3.2",
+    "run-sequence": "^2.2.1",
     "webpack": "^3.10.0"
   }
 }

@@ -12,7 +12,7 @@ let plumber = require('gulp-plumber');
 let sourcemaps = require('gulp-sourcemaps');
 
 
-gulp.task('sass', () => {
+gulp.task('sass', (callback) => {
 
     consoleLog.info('SASS compile');
 
@@ -83,5 +83,5 @@ gulp.task('sass', () => {
         //vygeneruji CSS soubory
         .pipe(gulp.dest(config.dist.styles.root));
 
-    return stream;
+    callback();
 });
