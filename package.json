@@ -2,7 +2,7 @@
   "name": "gulp-devstack",
   "version": "1.0.0",
   "description": "Gulp DevStack for develop.",
-  "main": "gulpfile.js",
+  "main": "gulpfile.babel.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -28,8 +28,26 @@
   },
   "homepage": "https://github.com/partyk/gulp-devstack#readme",
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-plugin-transform-object-assign": "^6.22.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-register": "^6.26.0",
+    "deepmerge": "^2.0.1",
     "gulp": "^4.0.0",
+    "gulp-clean": "^0.4.0",
     "gulp-cli": "^2.0.0",
-    "gulp-hub": "^4.2.0"
+    "gulp-concat": "^2.6.1",
+    "gulp-hub": "^4.2.0",
+    "gulp-imagemin": "^4.1.0",
+    "gulp-notify": "^3.2.0",
+    "gulp-plumber": "^1.2.0",
+    "gulp-sourcemaps": "^2.6.3",
+    "gulp-util": "^3.0.8",
+    "imagemin-jpegoptim": "^5.2.0",
+    "imagemin-pngquant": "^5.0.1",
+    "webpack": "^3.10.0"
   }
 }
