@@ -14,7 +14,7 @@ gulp.task('clean', (callback) => {
     consoleLog.info('Delete > ' + config.basePath.dist);
 
     if (!fs.existsSync(config.basePath.dist)) {
-        consoleLog.warn('Directory not exist!');
+        consoleLog.warn('Clean warn -> directory "' + config.basePath.dist + '" not exist!');
         callback();
         return;
     }
