@@ -15,6 +15,7 @@ gulp.task('clean', (callback) => {
 
     if (!fs.existsSync(config.basePath.dist)) {
         consoleLog.warn('Clean warn -> directory "' + config.basePath.dist + '" not exist!');
+        fs.mkdirSync(config.basePath.dist);
         callback();
         return;
     }
@@ -38,6 +39,11 @@ gulp.task('clean', (callback) => {
             errorHandler: onError,
         }))
         .pipe(clean());
+    
+    //a vytvorim novy adresar
+    if (!fs.existsSync(config.basePath.dist)){
+        fs.mkdirSync(config.basePath.dist);    
+    }
 
     callback();
 });

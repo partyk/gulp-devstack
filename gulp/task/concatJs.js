@@ -66,5 +66,4 @@ gulp.task('dependency', (callBack) => {
         //vygeneruji CSS soubory
         .pipe(gulp.dest(dist));
 
-    callBack();
 });

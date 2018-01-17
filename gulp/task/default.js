@@ -10,9 +10,9 @@ gulp.registry(hub);
 gulp.task('default', 
     gulp.series('clean', 
         gulp.parallel(
-            'imagemin', 
-            gulp.series('less','sass'),
+           'imagemin', 
+            gulp.series('less', 'sass'),
             gulp.series('dependency','webpack')
-        )
+        ),
     )
 );

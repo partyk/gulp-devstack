@@ -11,7 +11,7 @@ let notify = require('gulp-notify');
 let plumber = require('gulp-plumber');
 let sourcemaps = require('gulp-sourcemaps');
 
-gulp.task('less', () => {
+gulp.task('less', (callback) => {
     consoleLog.info('LESS compile');
 
     //callBack error
@@ -48,10 +48,7 @@ gulp.task('less', () => {
     }
 
     //vytvorim cestu + filtr na soubory
-    let src = path.format({
-        dir: config.app.less.root,
-        base: '**/*.+(less)'
-    });
+    let src = path.resolve(config.app.less.root, '**/*.+(less)');
 
     let stream = gulp.src(src);
 
@@ -81,6 +78,6 @@ gulp.task('less', () => {
         //vygeneruji CSS soubory
         .pipe(gulp.dest(config.dist.styles.root));
 
-    return stream;
-
+    //return stream;
+    callback();
 });

@@ -9,7 +9,7 @@ let pngquant = require('imagemin-pngquant');
 let notify = require('gulp-notify');
 let plumber = require('gulp-plumber');
 
-gulp.task('imagemin', function () {
+gulp.task('imagemin', function (callback) {
 
     consoleLog.info('Imagemin minify');
 
@@ -46,6 +46,6 @@ gulp.task('imagemin', function () {
             imagemin.svgo(),
         ]))
         .pipe(gulp.dest(config.dist.images.root));
-
-    return stream;
+    
+    callback();
 });

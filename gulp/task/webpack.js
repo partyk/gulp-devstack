@@ -123,5 +123,5 @@ gulp.task('webpack', function (callback) {
         return isReady = true;
     });
 
-    return bundle;
+    callback();
 });
