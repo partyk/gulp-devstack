@@ -76,8 +76,6 @@ gulp.task('less', (callback) => {
         //zastavim plumber
         .pipe(plumber.stop())
         //vygeneruji CSS soubory
-        .pipe(gulp.dest(config.dist.styles.root));
-
-    //return stream;
-    callback();
+        .pipe(gulp.dest(config.dist.styles.root))
+        .on('finish', callback);
 });

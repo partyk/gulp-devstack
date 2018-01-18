@@ -45,7 +45,6 @@ gulp.task('imagemin', function (callback) {
             imagemin.gifsicle(),
             imagemin.svgo(),
         ]))
-        .pipe(gulp.dest(config.dist.images.root));
-    
-    callback();
+        .pipe(gulp.dest(config.dist.images.root))
+        .on('finish', callback);
 });

@@ -38,12 +38,11 @@ gulp.task('clean', (callback) => {
         .pipe(plumber({
             errorHandler: onError,
         }))
-        .pipe(clean());
-    
-    //a vytvorim novy adresar
-    if (!fs.existsSync(config.basePath.dist)){
-        fs.mkdirSync(config.basePath.dist);    
-    }
-
-    callback();
+        .pipe(clean())
+        .on('finish', ()=>{
+            if (!fs.existsSync(config.basePath.dist)){
+                fs.mkdirSync(config.basePath.dist);    
+            }
+            callback();
+        });
 });

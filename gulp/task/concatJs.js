@@ -64,6 +64,6 @@ gulp.task('dependency', (callBack) => {
         //zastavim plumber
         .pipe(plumber.stop())
         //vygeneruji CSS soubory
-        .pipe(gulp.dest(dist));
-
+        .pipe(gulp.dest(dist))
+        .on('finish', callback);
 });
