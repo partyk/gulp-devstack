@@ -15,60 +15,66 @@ let dirName = {
 }
 
 let basePath = {
-    app: path.resolve(__dirname, dirName.app),
-    dist: path.resolve(__dirname, dirName.dist),
-    temp: path.resolve(__dirname, dirName.temp, 'gulp'),
-    nodeModule: path.resolve(__dirname, 'node_modules'),
-    bowerComponents: path.resolve(__dirname, 'bower_components'),
+    absoluteRoot: __dirname,
+    app: dirName.app + '/',
+    dist: dirName.dist + '/',
+    temp: dirName.temp + '/gulp/',
+    nodeModule: 'node_modules/',
+    bowerComponents: 'bower_components/',
 };
 
 let publicPath = {
     root: '/',
-    dist: path.resolve(dirName.dist),
     styles: {
-        root: path.resolve(dirName.dist, dirName.styles),
-        extends: path.resolve(dirName.dist, dirName.styles, dirName.extends),
+        root: '/' + dirName.styles + '/'
     },
-    scripts: {
-        root: path.resolve(dirName.dist, dirName.scripts),
-        extends: path.resolve(dirName.dist, dirName.scripts, dirName.extends),
+    fonts: {
+        root: '/' + dirName.fonts + '/'
     }
 }
 
 let app = {
     less: {
-        root: path.resolve(basePath.app, 'less'),
-        src: path.resolve(basePath.app, 'less', dirName.src)
+        root: basePath.app + 'less/',
+        src: basePath.app + 'less/' + dirName.src + '/',
     },
     sass: {
-        root: path.resolve(basePath.app, 'sass'),
-        src: path.resolve(basePath.app, 'sass', dirName.src)
+        root: basePath.app + 'sass/',
+        src: basePath.app + 'sass/' + dirName.src + '/'
     },
     scripts: {
-        root: path.resolve(basePath.app, dirName.scripts),
-        src: path.resolve(basePath.app, dirName.scripts, dirName.src),
-        extends: path.resolve(basePath.app, dirName.scripts, dirName.extends),
-        static: path.resolve(basePath.app, dirName.scripts, dirName.static)
+        root: basePath.app + dirName.scripts + '/',
+        src: basePath.app + dirName.scripts + '/' + dirName.src + '/',
+        extends: basePath.app + dirName.scripts + '/' + dirName.extends + '/',
+        static: basePath.app + dirName.scripts + '/' + dirName.static + '/',
     },
     images: {
-        root: path.resolve(basePath.app, dirName.images),
-        extends: path.resolve(basePath.dist, dirName.images, dirName.extends)
+        root: basePath.app + dirName.images + '/',
+        extends: basePath.dist + dirName.images + '/' + dirName.extends + '/',
+    },
+    fonts: {
+        root: basePath.app + dirName.fonts + '/',
+        extends: basePath.dist + dirName.fonts + '/' + dirName.extends + '/',
     }
 };
 
 let dist = {
     styles: {
-        root: path.resolve(basePath.dist, dirName.styles),
-        extends: path.resolve(basePath.dist, dirName.styles, dirName.extends)
+        root: basePath.dist + dirName.styles + '/',
+        extends: basePath.dist + dirName.styles + '/' + dirName.extends + '/',
     },
     scripts: {
-        root: path.resolve(basePath.dist, dirName.scripts),
-        extends: path.resolve(basePath.dist, dirName.scripts, dirName.extends),
-        static: path.resolve(basePath.app, dirName.scripts, dirName.static)
+        root: basePath.dist + dirName.scripts + '/',
+        extends: basePath.dist + dirName.scripts + '/' + dirName.extends + '/',
+        static: basePath.app + dirName.scripts + '/' + dirName.static + '/',
     },
     images: {
-        root: path.resolve(basePath.dist, dirName.images),
-        extends: path.resolve(basePath.dist, dirName.images, dirName.extends)
+        root: basePath.dist + dirName.images + '/',
+        extends: basePath.dist + dirName.images + '/' + dirName.extends + '/',
+    },
+    fonts: {
+        root: basePath.dist + dirName.fonts + '/',
+        extends: basePath.dist + dirName.fonts + '/' + dirName.extends + '/',
     }
 };
 
@@ -102,6 +108,7 @@ let concatJs = {
 
 module.exports = {
     basePath: basePath,
+    publicPath: publicPath,
     app: app,
     dist: dist,
     webpack: webpack,
