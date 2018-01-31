@@ -4,15 +4,16 @@
   "description": "Gulp DevStack for develop.",
   "main": "gulpfile.babel.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "develop": "gulp",
+    "production": "gulp --env production"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/partyk/gulp-devstack.git"
   },
   "keywords": [
-    "Gulp",
-    "4",
+    "Gulp 4",
     "Sass",
     "Less",
     "Webpack",
