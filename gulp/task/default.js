@@ -2,6 +2,7 @@
 import config from '../helpers/getConfig'
 import isProduction from '../helpers/isProduction'
 import gulp from 'gulp';
+import console from 'better-console';
 import HubRegistry from 'gulp-hub';
 
 let hub = new HubRegistry(['./*.js']);
