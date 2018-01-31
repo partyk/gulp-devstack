@@ -1,29 +1,16 @@
 let config = require('./../helpers/getConfig');
 let isProduction = require('./../helpers/isProduction');
-let consoleLog = require('./../helpers/consoleLog');
+let handler = require('./../helpers/handler');
+let console = require('better-console');
 
-let path = require('path');
 let gulp = require('gulp');
-let less = require('gulp-less');
-let gutil = require('gulp-util');
-let postcss = require('gulp-postcss');
-let notify = require('gulp-notify');
-let plumber = require('gulp-plumber');
-let sourcemaps = require('gulp-sourcemaps');
+let plugins = require('gulp-load-plugins');
+
+const $ = plugins();
 
 gulp.task('less', (callback) => {
-    consoleLog.info('LESS compile');
 
-    //callBack error
-    let onError = function (error) {
-        notify.onError({
-            title: 'LESS error!',
-            message: '<%= error.message %>',
-            sound: 'Beep',
-        })(error);
-
-        return this.emit('end');
-    };
+    console.info('LESS > compile less to css');
 
     //nastavim config pro sass stream
     let settings = {
@@ -48,33 +35,38 @@ gulp.task('less', (callback) => {
     }
 
     //vytvorim cestu + filtr na soubory
-    let src = path.resolve(config.app.less.root, '**/*.+(less)');
+    let src = config.app.less.src + '**/*.+(less)';
+
+    console.log(src);
 
     let stream = gulp.src(src);
 
     stream
         //nastavim plumber a v pripade chyby volam callback onError
-        .pipe(plumber({
-            errorHandler: onError,
+        .pipe($.plumber({
+            errorHandler: handler.error,
         }))
+        // .on('error', (error) => {
+        //     console.error(error)
+        // })
         //sourcemaps init
         .pipe(
-            isProduction()
-                ? gutil.noop()
-                : sourcemaps.init()
+        isProduction()
+            ? $.util.noop()
+            : $.sourcemaps.init()
         )
         //kompilace sass
-        .pipe(less())
+        .pipe($.less())
         //postcss
-        .pipe(postcss(settings.postCssPlugins))
+        .pipe($.postcss(settings.postCssPlugins))
         //vygeneruji sourcemaps
         .pipe(
-            isProduction()
-                ? gutil.noop()
-                : sourcemaps.write('./')
+        isProduction()
+            ? $.util.noop()
+            : $.sourcemaps.write('./')
         )
         //zastavim plumber
-        .pipe(plumber.stop())
+        .pipe($.plumber.stop())
         //vygeneruji CSS soubory
         .pipe(gulp.dest(config.dist.styles.root))
         .on('finish', callback);
