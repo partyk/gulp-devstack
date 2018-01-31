@@ -37,8 +37,6 @@ gulp.task('less', (callback) => {
     //vytvorim cestu + filtr na soubory
     let src = config.app.less.src + '**/*.+(less)';
 
-    console.log(src);
-
     let stream = gulp.src(src);
 
     stream

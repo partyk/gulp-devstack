@@ -1,55 +1,39 @@
 let config = require('./../helpers/getConfig');
 let isProduction = require('./../helpers/isProduction');
-let consoleLog = require('./../helpers/consoleLog');
+let console = require('better-console');
 
-let path = require('path');
 let gulp = require('gulp');
-let concat = require('gulp-concat');
-let sourcemaps = require('gulp-sourcemaps');
-let notify = require('gulp-notify');
-let plumber = require('gulp-plumber');
+let plugins = require('gulp-load-plugins');
 
-gulp.task('dependency', (callBack) => {
+const $ = plugins();
 
-    consoleLog.info('Concat > ' + config.concatJs.dependencyJs.name);
+gulp.task('dependencyJs', (callBack) => {
 
-    //callBack error
-    let onError = function (error) {
-        notify.onError({
-            title: 'Concat error!',
-            message: '<%= error.message %>',
-            sound: 'Beep',
-        })(error);
-
-        return this.emit('end');
-    };
-
-    //vytvorim cestu + filtr na soubory
-    let dist = path.format({
-        dir: config.dist.scripts.static,
-        base: config.concatJs.dependencyJs.name
-    });
+    console.info('Concat > ' + config.concatJs.dependencyJs.name);
 
     if (config.concatJs.dependencyJs.files.length === 0) {
-        consoleLog.warn('Concat dependency warn -> Mising files for concat!');
+        console.warn('Concat dependency warn -> Mising files for concat!');
         callBack();  
         return;     
     }
+
+    let dist = config.dist.scripts.static + config.concatJs.dependencyJs.name;
 
     let stream = gulp.src(config.concatJs.dependencyJs.files);
 
     stream
         //nastavim plumber a v pripade chyby volam callback onError
-        .pipe(plumber({
-            errorHandler: onError,
-        }))
+        .on('error', (e) => {
+            throw new Error(e);
+            stream.end();
+        })
         //sourcemaps init
         .pipe(
             isProduction()
-                ? gutil.noop()
-                : sourcemaps.init()
+                ? $.util.noop()
+                : $.sourcemaps.init()
         )
-        .pipe(concat({
+        .pipe($.concat({
             path: dist,
             stat: {
                 //mode: 0666 
@@ -58,12 +42,10 @@ gulp.task('dependency', (callBack) => {
         //vygeneruji sourcemaps
         .pipe(
             isProduction()
-                ? gutil.noop()
-                : sourcemaps.write('./')
+                ? $.util.noop()
+                : $.sourcemaps.write('./')
         )
-        //zastavim plumber
-        .pipe(plumber.stop())
-        //vygeneruji CSS soubory
+        //vygeneruji soubor
         .pipe(gulp.dest(dist))
         .on('finish', callback);
 });

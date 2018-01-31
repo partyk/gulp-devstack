@@ -1,29 +1,15 @@
 let config = require('./../helpers/getConfig');
 let isProduction = require('./../helpers/isProduction');
-let consoleLog = require('./../helpers/consoleLog');
+let console = require('better-console');
 
 let gulp = require('gulp');
 let imagemin = require('gulp-imagemin');
 let jpegoptim = require('imagemin-jpegoptim');
 let pngquant = require('imagemin-pngquant');
-let notify = require('gulp-notify');
-let plumber = require('gulp-plumber');
 
-gulp.task('imagemin', function (callback) {
+gulp.task('imagemin', (callback) => {
 
-    consoleLog.info('Imagemin minify');
-
-    //callBack error
-    let onError = function (error) {
-        notify.onError({
-            title: 'Image error!',
-            message: '<%= error.message %>',
-            sound: 'Beep',
-        })(error);
-
-        return this.emit('end');
-    };
-
+    console.info('Imagemin > minifying of images');
 
     let stream = gulp.src([
             '**/*.{png,jpg,gif,svg,ico}',
@@ -34,9 +20,10 @@ gulp.task('imagemin', function (callback) {
 
     stream
         //nastavim plumber a v pripade chyby volam callback onError
-        .pipe(plumber({
-            errorHandler: onError,
-        }))
+        .on('error', (e) => {
+            throw new Error(e);
+            stream.end();
+        })
         .pipe(imagemin([
             jpegoptim({
                 progressive: true,

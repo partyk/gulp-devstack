@@ -3,13 +3,14 @@ let isProduction = require('./../helpers/isProduction');
 let consoleLog = require('./../helpers/consoleLog');
 
 let path = require('path');
-let gulp = require('gulp');
-let notify = require('gulp-notify');
 let webpack = require('webpack');
-let gutil = require('gulp-util');
+let gulp = require('gulp');
+let plugins = require('gulp-load-plugins');
+
+const $ = plugins();
 
 let isMinwatch = function () {
-    return gutil.env._[0] === 'minwatch';
+    return $.util.env._[0] === 'minwatch';
 };
 
 
@@ -30,7 +31,7 @@ gulp.task('webpack', function (callback) {
             front: path.resolve(config.app.scripts.src, 'front.js'),
         },
         output: {
-            path: config.dist.scripts.root,
+            path: path.resolve(config.dist.scripts.root),
             filename: '[name].js',
             publicPath: '../js/',
             chunkFilename: '[name].chunk.js',
@@ -54,7 +55,7 @@ gulp.task('webpack', function (callback) {
         },
         devtool: isProduction() ? false : 'source-map',
         externals: {
-            'jquery': 'jQuery',
+           // 'jquery': 'jQuery',
         },
     };
 
@@ -93,7 +94,7 @@ gulp.task('webpack', function (callback) {
         settings.plugins.push(new webpack.optimize.ModuleConcatenationPlugin());
     }
 
-    let onError = notify.onError(function (error) {
+    let onError = $.notify.onError(function (error) {
         return {
             title: 'JS error!',
             message: error,
@@ -113,7 +114,7 @@ gulp.task('webpack', function (callback) {
         } else if (warnings.length > 0) {
             onError(warnings.toString());
         } else {
-            gutil.log('[webpack]', stats.toString(config.webpack.stats));
+            $.util.log('[webpack]', stats.toString(config.webpack.stats));
         }
 
         if (!isReady) {

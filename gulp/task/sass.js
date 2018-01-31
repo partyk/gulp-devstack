@@ -1,31 +1,17 @@
 let config = require('./../helpers/getConfig');
 let isProduction = require('./../helpers/isProduction');
-let consoleLog = require('./../helpers/consoleLog');
+let handler = require('./../helpers/handler');
+let console = require('better-console');
 
-let path = require('path');
 let gulp = require('gulp');
-let sass = require('gulp-sass');
-let gutil = require('gulp-util');
-let postcss = require('gulp-postcss');
-let notify = require('gulp-notify');
-let plumber = require('gulp-plumber');
-let sourcemaps = require('gulp-sourcemaps');
+let plugins = require('gulp-load-plugins');
+
+const $ = plugins();
 
 
 gulp.task('sass', (callback) => {
 
-    consoleLog.info('SASS compile');
-
-    //callBack error
-    let onError = function (error) {
-        notify.onError({
-            title: 'SASS error!',
-            message: '<%= error.message %>',
-            sound: 'Beep',
-        })(error);
-
-        return this.emit('end');
-    };
+    console.info('SASS > compile sass to css');
 
     //nastavim config pro sass stream
     let settings = {
@@ -50,33 +36,36 @@ gulp.task('sass', (callback) => {
     }
 
     //vytvorim cestu + filtr na soubory
-    let src = path.resolve(config.app.sass.root, '**/*.+(scss|sass)');
+    let src = config.app.sass.src + '**/*.+(scss|sass)';
 
     let stream = gulp.src(src);
 
     stream
         //nastavim plumber a v pripade chyby volam callback onError
-        .pipe(plumber({
-            errorHandler: onError,
+        .pipe($.plumber({
+            errorHandler: handler.error,
         }))
+        // .on('error', (error) => {
+        //     console.error(error);
+        // })
         //sourcemaps init
         .pipe(
             isProduction()
-                ? gutil.noop()
-                : sourcemaps.init()
+                ? $.util.noop()
+                : $.sourcemaps.init()
         )
         //kompilace sass
-        .pipe(sass())
+        .pipe($.sass())
         //postcss
-        .pipe(postcss(settings.postCssPlugins))
+        .pipe($.postcss(settings.postCssPlugins))
         //vygeneruji sourcemaps
         .pipe(
             isProduction()
-                ? gutil.noop()
-                : sourcemaps.write('./')
+                ? $.util.noop()
+                : $.sourcemaps.write('./')
         )
         //zastavim plumber
-        .pipe(plumber.stop())
+        .pipe($.plumber.stop())
         //vygeneruji CSS soubory
         .pipe(gulp.dest(config.dist.styles.root))
         .on('finish', callback);
