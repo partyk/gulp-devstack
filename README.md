@@ -1,7 +1,7 @@
 # Gulp DevStack
 Gulp DevStack for develop
 
-## Instalation from GitLab
+## Instalation from Git
 
 1.  Download or clone repository
 2.  run ```npm install```
