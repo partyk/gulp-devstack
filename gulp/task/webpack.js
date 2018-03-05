@@ -1,6 +1,6 @@
 let config = require('./../helpers/getConfig');
 let isProduction = require('./../helpers/isProduction');
-let consoleLog = require('./../helpers/consoleLog');
+let console = require('better-console');
 
 let path = require('path');
 let webpack = require('webpack');
@@ -16,7 +16,7 @@ let isMinwatch = function () {
 
 gulp.task('webpack', function (callback) {
 
-    consoleLog.info('Webpack compile');
+    console.info('Webpack compile');
 
     let isReady = false;
     let settings = {
