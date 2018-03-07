@@ -14,7 +14,7 @@ gulp.task('default',
     gulp.series('clean',
         gulp.parallel( 
             'imagemin',
-            gulp.series('less', 'sass', 'watch'),
+            gulp.series('iconfont', 'less', 'sass', 'watch'),
             gulp.series('webpack')
         ),
     )
