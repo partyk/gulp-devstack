@@ -1,5 +1,11 @@
 let path = require('path');
 
+let optionsApp = {
+    develop: {
+        browserSync: false,
+    }
+}
+
 let dirName = {
     root: '/',
     temp: 'temp',
@@ -107,6 +113,7 @@ let concatJs = {
 }
 
 module.exports = {
+    optionsApp: optionsApp,
     basePath: basePath,
     publicPath: publicPath,
     app: app,
