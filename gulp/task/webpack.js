@@ -6,6 +6,7 @@ let path = require('path');
 let webpack = require('webpack');
 let gulp = require('gulp');
 let plugins = require('gulp-load-plugins');
+let UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const $ = plugins();
 
@@ -20,6 +21,7 @@ gulp.task('webpack', function (callback) {
 
     let isReady = false;
     let settings = {
+        mode: isProduction() ? 'production' : 'development',
         resolve: {
             extensions: ['.js', '.json'],
             modules: [
@@ -46,7 +48,7 @@ gulp.task('webpack', function (callback) {
             ],
         },
         plugins: [
-
+            
         ],
         profile: true,
         watch: !isProduction() || isMinwatch(),
@@ -55,7 +57,7 @@ gulp.task('webpack', function (callback) {
         },
         devtool: isProduction() ? false : 'source-map',
         externals: {
-           // 'jquery': 'jQuery',
+            // 'jquery': 'jQuery',
         },
     };
 
@@ -67,29 +69,50 @@ gulp.task('webpack', function (callback) {
 	*/
 
     if (isProduction()) {
-        settings.plugins.push(new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                screw_ie8: true,
-                warnings: false,
-                properties: true,
-                sequences: true,
-                dead_code: true,
-                drop_debugger: true,
-                unsafe: false,
-                conditionals: true,
-                evaluate: true,
-                booleans: true,
-                loops: true,
-                unused: true,
-                if_return: true,
-                join_vars: true,
-                cascade: true,
-                hoist_vars: false,
-                hoist_funs: true,
-                drop_console: true,
-            },
-            comments: false,
-        }));
+        settings.plugins.push(new UglifyJsPlugin({
+            uglifyOptions: {
+              ecma: 8,
+              warnings: false,
+              mangle: {
+                properties: {
+                  // mangle property options
+                }
+              },
+              output: {
+                comments: false,
+                beautify: false,
+              },
+              toplevel: false,
+              nameCache: null,
+              ie8: false,
+              keep_classnames: undefined,
+              keep_fnames: false,
+              safari10: false
+            }
+          }));
+        // settings.plugins.push(new webpack.optimize.UglifyJsPlugin({
+        //     compress: {
+        //         screw_ie8: true,
+        //         warnings: false,
+        //         properties: true,
+        //         sequences: true,
+        //         dead_code: true,
+        //         drop_debugger: true,
+        //         unsafe: false,
+        //         conditionals: true,
+        //         evaluate: true,
+        //         booleans: true,
+        //         loops: true,
+        //         unused: true,
+        //         if_return: true,
+        //         join_vars: true,
+        //         cascade: true,
+        //         hoist_vars: false,
+        //         hoist_funs: true,
+        //         drop_console: true,
+        //     },
+        //     comments: false,
+        // }));
 
         settings.plugins.push(new webpack.optimize.ModuleConcatenationPlugin());
     }
