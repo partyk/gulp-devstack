@@ -71,25 +71,32 @@ gulp.task('webpack', function (callback) {
     if (isProduction()) {
         settings.plugins.push(new UglifyJsPlugin({
             uglifyOptions: {
-              ecma: 8,
-              warnings: false,
-              mangle: {
-                properties: {
-                  // mangle property options
-                }
-              },
-              output: {
-                comments: false,
-                beautify: false,
-              },
-              toplevel: false,
-              nameCache: null,
-              ie8: false,
-              keep_classnames: undefined,
-              keep_fnames: false,
-              safari10: false
+                /*
+                compress: {
+
+                },
+                output: {
+                    // output options
+                },
+                sourceMap: {
+                    // source map options
+                },
+                parse: {
+                    // parse options
+                },*/
+                
+                /* mangle: true,
+                ecma: 5, // specify one of: 5, 6, 7 or 8
+                keep_classnames: false,
+                keep_fnames: false,
+                ie8: false,
+                nameCache: null, // or specify a name cache object
+                safari10: false,
+                toplevel: false,
+                warnings: false,
+                unsafe: false, */
             }
-          }));
+        }));
         // settings.plugins.push(new webpack.optimize.UglifyJsPlugin({
         //     compress: {
         //         screw_ie8: true,
