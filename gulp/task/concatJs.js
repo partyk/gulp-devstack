@@ -30,7 +30,7 @@ gulp.task('dependencyJs', (callBack) => {
         //sourcemaps init
         .pipe(
             isProduction()
-                ? $.util.noop()
+                ? $.noop()
                 : $.sourcemaps.init()
         )
         .pipe($.concat({
@@ -42,7 +42,7 @@ gulp.task('dependencyJs', (callBack) => {
         //vygeneruji sourcemaps
         .pipe(
             isProduction()
-                ? $.util.noop()
+                ? $.noop()
                 : $.sourcemaps.write('./')
         )
         //vygeneruji soubor

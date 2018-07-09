@@ -50,7 +50,7 @@ gulp.task('less', (callback) => {
         //sourcemaps init
         .pipe(
         isProduction()
-            ? $.util.noop()
+            ? $.noop()
             : $.sourcemaps.init()
         )
         //kompilace sass
@@ -60,7 +60,7 @@ gulp.task('less', (callback) => {
         //vygeneruji sourcemaps
         .pipe(
         isProduction()
-            ? $.util.noop()
+            ? $.noop()
             : $.sourcemaps.write('./')
         )
         //zastavim plumber
