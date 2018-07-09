@@ -7,7 +7,7 @@
                     "browsers": [
                         "> 1% in CZ",
                         "Explorer >= 10",
-                        "iOs >= 7",
+                        "iOs >= 9",
                         "last 3 versions"
                     ]
                 }
