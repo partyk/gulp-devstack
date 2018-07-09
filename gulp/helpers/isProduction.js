@@ -1,5 +1,5 @@
-let gutil = require('gulp-util');
+let argv = require('minimist')(process.argv.slice(2));
 
 module.exports = function() {
-	return gutil.env.env === 'production';
+	return argv.env === 'production';
 };

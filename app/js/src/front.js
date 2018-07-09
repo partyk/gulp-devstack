@@ -1,9 +1,9 @@
 //auto load polyfill for babel
-import "babel-polyfill";
+//import "babel-polyfill";
 
 import '../module/test';
 
-//global.jQuery = jQuery; //nastvim jQuery jako global
+//global.jQuery = jQuery; //nastavim jQuery jako global
 
 let aaa = Object.assign({}, {
     aaa: "aaa",

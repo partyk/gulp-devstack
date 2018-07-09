@@ -1,18 +1,19 @@
 let plugins = require('gulp-load-plugins');
+let beeper = require('beeper');
+let console = require('better-console');
 
 const $ = plugins();
 
 let handler = {
     error: (error) => {
         var report = '\n';
-        var chalk = $.util.colors.white.bgRed;
 
         if (error.plugin) {
-            report += chalk('PLUGIN:') + ' [' + error.plugin + ']\n';
+            report += 'PLUGIN:' + ' [' + error.plugin + ']\n';
         }
 
         if (error.message) {
-            report += chalk('ERROR:') + ' ' + error.message + '\n';
+            report += 'ERROR:' + ' ' + error.message + '\n';
         }
 
         console.error(report);
@@ -29,7 +30,7 @@ let handler = {
             sound: 'Sosumi'
         }).write(error);
 
-        $.util.beep();
+        beeper();
 
         //this.emit('end');
     }

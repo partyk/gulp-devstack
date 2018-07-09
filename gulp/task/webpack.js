@@ -10,11 +10,6 @@ let UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const $ = plugins();
 
-let isMinwatch = function () {
-    return $.util.env._[0] === 'minwatch';
-};
-
-
 gulp.task('webpack', function (callback) {
 
     console.info('Webpack compile');
@@ -57,7 +52,7 @@ gulp.task('webpack', function (callback) {
             
         ],
         profile: true,
-        watch: !isProduction() || isMinwatch(),
+        watch: !isProduction(),
         watchOptions: {
             ignored: /node_modules|bower_components/,
         },
@@ -126,7 +121,7 @@ gulp.task('webpack', function (callback) {
         } else if (warnings.length > 0) {
             onError(warnings.toString());
         } else {
-            $.util.log('[webpack]', stats.toString(config.webpack.stats));
+            console.log('[webpack]', stats.toString(config.webpack.stats));
         }
 
         if (!isReady) {
