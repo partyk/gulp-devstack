@@ -5,8 +5,8 @@
             {
                 "targets": {
                     "browsers": [
-                        "> 2% in CZ",
-                        "Explorer >= 9",
+                        "> 1% in CZ",
+                        "Explorer >= 10",
                         "iOs >= 7",
                         "last 3 versions"
                     ]
@@ -17,6 +17,6 @@
     "plugins": [
         "transform-object-rest-spread",
         "babel-plugin-syntax-dynamic-import",
-        "transform-object-assign"
+        //"transform-object-assign"
     ]
 }

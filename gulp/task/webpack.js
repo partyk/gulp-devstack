@@ -22,7 +22,13 @@ gulp.task('webpack', function (callback) {
     let isReady = false;
     let settings = {
         mode: isProduction() ? 'production' : 'development',
+        performance: {
+            //hints: false //pokud se bude buildovat vetsi soubor nez 250kB, tak lze potlacit hlasku false
+        },
         resolve: {
+            alias: {
+                'jquery' : require.resolve('jquery') //kvuli pouzivani jQuery v modulech aby se nemusel vsude importovat
+            },
             extensions: ['.js', '.json'],
             modules: [
                 config.basePath.nodeModule,
@@ -35,8 +41,8 @@ gulp.task('webpack', function (callback) {
         output: {
             path: path.resolve(config.dist.scripts.root),
             filename: '[name].js',
-            publicPath: '../js/',
-            chunkFilename: '[name].chunk.js',
+            publicPath: '../js/', //nastaveni cesty k chunkum
+            chunkFilename: 'chunks/[name].chunk.js',
         },
         module: {
             rules: [
@@ -61,12 +67,11 @@ gulp.task('webpack', function (callback) {
         },
     };
 
-	/* automaticke nacitani modulu
+	// automaticke nacitani modulu
 	settings.plugins.push(new webpack.ProvidePlugin({
 		$: 'jquery',
 		jQuery: 'jquery'
 	}));
-	*/
 
     if (isProduction()) {
         settings.plugins.push(new UglifyJsPlugin({
@@ -97,29 +102,6 @@ gulp.task('webpack', function (callback) {
                 unsafe: false, */
             }
         }));
-        // settings.plugins.push(new webpack.optimize.UglifyJsPlugin({
-        //     compress: {
-        //         screw_ie8: true,
-        //         warnings: false,
-        //         properties: true,
-        //         sequences: true,
-        //         dead_code: true,
-        //         drop_debugger: true,
-        //         unsafe: false,
-        //         conditionals: true,
-        //         evaluate: true,
-        //         booleans: true,
-        //         loops: true,
-        //         unused: true,
-        //         if_return: true,
-        //         join_vars: true,
-        //         cascade: true,
-        //         hoist_vars: false,
-        //         hoist_funs: true,
-        //         drop_console: true,
-        //     },
-        //     comments: false,
-        // }));
 
         settings.plugins.push(new webpack.optimize.ModuleConcatenationPlugin());
     }
