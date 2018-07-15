@@ -1,0 +1,20 @@
+{
+  "extends": "standard",
+  "env": {
+    "browser": true,
+    "jquery": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+    }
+  },
+  "rules": {
+    "indent": [1, 4],
+    "semi": [2, "always", { "omitLastInOneLineBlock": true }],
+    "quotes": [2, "single", { "allowTemplateLiterals": true }],
+    "eol-last": 0,
+    "spaced-comment": 1
+  }
+}

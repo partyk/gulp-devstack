@@ -1,2 +1,3 @@
 console.log('Test module: OK');
-//console.log('Version jQuery:' + jQuery.fn.jquery);
+
+// console.log('Version jQuery:' + jQuery.fn.jquery);
