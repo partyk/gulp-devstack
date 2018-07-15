@@ -6,7 +6,8 @@ const $ = plugins();
 
 let handler = {
     error: (error) => {
-        var report = '\n';
+        let report = '\n',
+            notifyMessage;
 
         if (error.plugin) {
             report += 'PLUGIN:' + ' [' + error.plugin + ']\n';
@@ -19,9 +20,9 @@ let handler = {
         console.error(report);
 
         if (error.line && error.column) {
-            var notifyMessage = 'LINE ' + error.line + ':' + error.column + ' -- ';
+            notifyMessage = 'LINE ' + error.line + ':' + error.column + ' -- ';
         } else {
-            var notifyMessage = '';
+            notifyMessage = '';
         }
 
         $.notify({
@@ -31,9 +32,7 @@ let handler = {
         }).write(error);
 
         beeper();
-
-        //this.emit('end');
     }
-}
+};
 
 module.exports = handler;
