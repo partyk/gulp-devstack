@@ -2,6 +2,8 @@ let plugins = require('gulp-load-plugins');
 let beeper = require('beeper');
 let console = require('better-console');
 
+import isProduction from './isProduction';
+
 const $ = plugins();
 
 let handler = {
@@ -32,6 +34,14 @@ let handler = {
         }).write(error);
 
         beeper();
+
+        /**
+         * in production mode is process stopped
+         */
+        if(isProduction()) {
+            process.exit(1);
+        }
+
     }
 };
 
