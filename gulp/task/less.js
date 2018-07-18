@@ -38,7 +38,7 @@ gulp.task('less', (callback) => {
     let src = config.app.less.src + '**/*.+(less)';
 
     let stream = gulp.src(src, {
-        since: gulp.lastRun('less') // This option takes a timestamp, and gulp.src will filter files that are older than the given time.
+        // since: gulp.lastRun('less') // This option takes a timestamp, and gulp.src will filter files that are older than the given time.
     });
 
     stream

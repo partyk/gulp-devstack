@@ -16,7 +16,7 @@ gulp.task('imagemin', (callback) => {
             //'!' + config.app.images.extends,
         ], {
             cwd: config.app.images.root,
-            since: gulp.lastRun('imagemin') // This option takes a timestamp, and gulp.src will filter files that are older than the given time.
+            // since: gulp.lastRun('imagemin') // This option takes a timestamp, and gulp.src will filter files that are older than the given time.
         });
 
     stream

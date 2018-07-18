@@ -39,7 +39,7 @@ gulp.task('sass', (callback) => {
     let src = config.app.sass.src + '**/*.+(scss|sass)';
 
     let stream = gulp.src(src, {
-        since: gulp.lastRun('sass') // This option takes a timestamp, and gulp.src will filter files that are older than the given time.
+        // since: gulp.lastRun('sass') // This option takes a timestamp, and gulp.src will filter files that are older than the given time.
     });
 
     stream
