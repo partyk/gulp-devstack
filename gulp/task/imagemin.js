@@ -1,5 +1,5 @@
 let config = require('./../helpers/getConfig');
-let isProduction = require('./../helpers/isProduction');
+// let isProduction = require('./../helpers/isProduction');
 let console = require('better-console');
 
 let gulp = require('gulp');
@@ -16,13 +16,12 @@ gulp.task('imagemin', (callback) => {
             //'!' + config.app.images.extends,
         ], {
             cwd: config.app.images.root,
+            since: gulp.lastRun('imagemin') // This option takes a timestamp, and gulp.src will filter files that are older than the given time.
         });
 
     stream
-        //nastavim plumber a v pripade chyby volam callback onError
         .on('error', (e) => {
             throw new Error(e);
-            stream.end();
         })
         .pipe(imagemin([
             jpegoptim({

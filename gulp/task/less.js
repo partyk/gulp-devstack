@@ -37,7 +37,9 @@ gulp.task('less', (callback) => {
     //vytvorim cestu + filtr na soubory
     let src = config.app.less.src + '**/*.+(less)';
 
-    let stream = gulp.src(src);
+    let stream = gulp.src(src, {
+        since: gulp.lastRun('less') // This option takes a timestamp, and gulp.src will filter files that are older than the given time.
+    });
 
     stream
         //nastavim plumber a v pripade chyby volam callback onError

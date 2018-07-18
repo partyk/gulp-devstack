@@ -38,7 +38,9 @@ gulp.task('sass', (callback) => {
     //vytvorim cestu + filtr na soubory
     let src = config.app.sass.src + '**/*.+(scss|sass)';
 
-    let stream = gulp.src(src);
+    let stream = gulp.src(src, {
+        since: gulp.lastRun('sass') // This option takes a timestamp, and gulp.src will filter files that are older than the given time.
+    });
 
     stream
         //nastavim plumber a v pripade chyby volam callback onError
