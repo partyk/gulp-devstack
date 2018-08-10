@@ -30,12 +30,12 @@ gulp.task('watch', (callback) => {
     console.info('Watch > start');
 
     //sass
-    gulp.watch(config.app.sass.root + '**/*.+(scss|sass)', gulp.series('sass'));
+    gulp.watch(config.app.sass.root + '**/*.+(scss|sass)', gulp.parallel('sass'));
 
     //less
-    gulp.watch(config.app.less.root + '**/*.less', gulp.series('less'));
+    gulp.watch(config.app.less.root + '**/*.less', gulp.parallel('less'));
 
     //images
-    gulp.watch(config.app.images.root + '**/*.{png,jpg,gif,svg,ico}', gulp.series('imagemin'));
+    gulp.watch(config.app.images.root + '**/*.{png,jpg,gif,svg,ico}', gulp.parallel('imagemin'));
 
 });

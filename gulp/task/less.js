@@ -24,7 +24,10 @@ gulp.task('less', (callback) => {
             // require('postcss-opacity')(),
             // require('postcss-pseudoelements')(),
             // require('postcss-vmin')(),
-        ]
+        ],
+        less: {
+            useFileCache: true // enabled cache file
+        }
     };
 
     //pridam do postCssPluginy pro produkci
@@ -55,8 +58,8 @@ gulp.task('less', (callback) => {
             ? $.noop()
             : $.sourcemaps.init()
         )
-        //kompilace sass
-        .pipe($.less())
+        //kompilace less
+        .pipe($.less(settings.less))
         //postcss
         .pipe($.postcss(settings.postCssPlugins))
         //vygeneruji sourcemaps
