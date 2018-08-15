@@ -15,6 +15,11 @@
     "semi": [2, "always", { "omitLastInOneLineBlock": true }],
     "quotes": [2, "single", { "allowTemplateLiterals": true }],
     "eol-last": 0,
-    "spaced-comment": 1
+    "spaced-comment": 1,
+    "space-before-function-paren": [2, {
+      "anonymous": "always",
+      "named": "never",
+      "asyncArrow": "always"
+    }]
   }
 }
