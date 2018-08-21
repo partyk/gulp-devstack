@@ -31,6 +31,10 @@ let basePath = {
 
 let publicPath = {
     root: '/',
+    images: {
+        root: '/' + dirName.images + '/',
+        extends: '/' + dirName.images + '/' + dirName.extends + '/'
+    },
     styles: {
         root: '/' + dirName.styles + '/'
     },
@@ -118,6 +122,7 @@ module.exports = {
     publicPath: publicPath,
     app: app,
     dist: dist,
+    dirName: dirName,
     webpack: webpack,
     browser: browser,
     fontSize: fontSize,

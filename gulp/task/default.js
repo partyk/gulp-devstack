@@ -4,6 +4,7 @@ import isProduction from '../helpers/isProduction'
 import gulp from 'gulp';
 import console from 'better-console';
 import HubRegistry from 'gulp-hub';
+import shell from 'gulp-shell';
 
 let hub = new HubRegistry(['./*.js']);
 
@@ -14,7 +15,7 @@ gulp.task('default',
     gulp.series('clean',
         gulp.parallel( 
             'imagemin',
-            gulp.series('iconfont', 'less', 'sass', 'watch'),
+            gulp.series('bowerfix', 'iconfont', 'less', 'sass', 'watch'),
             gulp.series('webpack')
         ),
     )

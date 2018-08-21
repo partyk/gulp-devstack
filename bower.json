@@ -1,0 +1,46 @@
+{
+  "name": "gulp-devstack",
+  "description": "Gulp DevStack for develop.",
+  "main": "gulpfile.babel.js",
+  "authors": [
+    "Bohdan Partyk <bohdan@partyk.cz>"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "Gulp",
+    "4",
+    "Sass",
+    "Less",
+    "Webpack",
+    "Babel",
+    "JavaScript",
+    "DevStack",
+    "FrontEnd"
+  ],
+  "homepage": "https://github.com/partyk/gulp-devstack",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jqueryui": "1.11.*"
+  },
+  "install": {
+    "base": "./temp/gulp/bower",
+    "path": {
+      "js": "{name}",
+      "css": "{name}",
+      "eot": "{name}/fonts", "ttf": "{name}/fonts", "woff": "{name}/fonts", "woff2": "{name}/fonts", "otf": "{name}/fonts",
+      "jpg": "{name}/images", "png": "{name}/images", "gif": "{name}/images", "jpeg": "{name}/images"
+    },
+    "sources": {
+      "jqueryui": [
+        "bower_components/jqueryui/themes/smoothness/jquery-ui.min.css",
+        "bower_components/jqueryui/themes/smoothness/images/*.*"
+      ]
+    }
+  }
+}
