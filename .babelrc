@@ -1,22 +1,18 @@
 {
     "presets": [
-        [
-            "env",
-            {
-                "targets": {
-                    "browsers": [
-                        "> 1% in CZ",
-                        "Explorer >= 10",
-                        "iOs >= 9",
-                        "last 3 versions"
-                    ]
-                }
+        ["env", {
+            "targets": {
+                "browsers": [
+                    "> 1% in CZ",
+                    "Explorer >= 10",
+                    "iOs >= 9",
+                    "last 3 versions"
+                ]
             }
-        ]
+        }]
     ],
     "plugins": [
         "transform-object-rest-spread",
-        "babel-plugin-syntax-dynamic-import",
-        //"transform-object-assign"
+        "babel-plugin-syntax-dynamic-import"
     ]
 }
