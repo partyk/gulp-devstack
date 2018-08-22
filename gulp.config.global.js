@@ -55,7 +55,7 @@ let app = {
     scripts: {
         root: basePath.app + dirName.scripts + '/',
         src: basePath.app + dirName.scripts + '/' + dirName.src + '/',
-        extends: basePath.app + dirName.scripts  + '/' + dirName.src + '/' + '/' + dirName.extends + '/',
+        extends: basePath.app + dirName.scripts  + '/' + dirName.src + '/' + dirName.extends + '/',
         static: basePath.app + dirName.scripts + '/' + dirName.static + '/',
     },
     images: {

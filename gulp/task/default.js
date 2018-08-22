@@ -16,6 +16,7 @@ gulp.task('default',
         gulp.parallel( 
             'imagemin',
             gulp.series('bowerfix', 'iconfont', 'less', 'sass', 'watch'),
+            gulp.series('extendsjs'),
             gulp.series('webpack')
         ),
     )
@@ -35,6 +36,9 @@ gulp.task('watch', (callback) => {
 
     //less
     gulp.watch(config.app.less.root + '**/*.less', gulp.parallel('less'));
+
+    //extends
+    gulp.watch([config.optionsJs.extends], gulp.parallel('extendsjs'));
 
     //images
     gulp.watch(config.app.images.root + '**/*.{png,jpg,gif,svg,ico}', gulp.parallel('imagemin'));

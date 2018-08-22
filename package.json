@@ -54,6 +54,7 @@
     "gulp-clean": "^0.4.0",
     "gulp-cli": "^2.0.0",
     "gulp-concat": "^2.6.1",
+    "gulp-eslint": "^5.0.0",
     "gulp-fontello": "^0.4.6",
     "gulp-hub": "^4.2.0",
     "gulp-iconfont": "^10.0.0",
