@@ -12,8 +12,6 @@ let pngquant = require('imagemin-pngquant');
 
 const $ = plugins();
 
-console.log(config.publicPath.root);
-
 gulp.task('bowerfix', gulp.series(
      $.shell.task('npm run bower-installer'),
     (callback) => {
