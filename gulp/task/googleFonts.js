@@ -8,13 +8,14 @@ let plugins = require('gulp-load-plugins');
 
 const $ = plugins();
 
-let options = {
+let optionsFonts = {
     // embed: false,
-    fontsDir: config.publicPath.fonts.root + 'google/'
+    fontsDir: 'google',
+    cssDir: 'google'
 };
 
 let src = config.app.fonts.root + 'googleFonts/fonts.list';
-let dist = config.dist.fonts.root + 'google';
+let dist = config.dist.fonts.root;
 
 gulp.task('googleFonts', gulp.series(
     (callback) => {
@@ -30,7 +31,7 @@ gulp.task('googleFonts', gulp.series(
                 throw new Error(e);
                 isProduction() ? process.exit(1) : stream.end();
             })
-            .pipe($.googleWebfonts(Object.assign({}, options,
+            .pipe($.googleWebfonts(Object.assign({}, optionsFonts,
                 {
                     cssFilename: 'fontsWoff.css',
                     format: 'woff'
@@ -50,7 +51,7 @@ gulp.task('googleFonts', gulp.series(
                 throw new Error(e);
                 isProduction() ? process.exit(1) : stream.end();
             })
-            .pipe($.googleWebfonts(Object.assign({}, options,
+            .pipe($.googleWebfonts(Object.assign({}, optionsFonts,
                 {
                     cssFilename: 'fontsWoff2.css',
                     format: 'woff2'
@@ -70,7 +71,7 @@ gulp.task('googleFonts', gulp.series(
                 throw new Error(e);
                 isProduction() ? process.exit(1) : stream.end();
             })
-            .pipe($.googleWebfonts(Object.assign({}, options,
+            .pipe($.googleWebfonts(Object.assign({}, optionsFonts,
                 {
                     cssFilename: 'fontsSvg.css',
                     format: 'svg'
@@ -90,7 +91,7 @@ gulp.task('googleFonts', gulp.series(
                 throw new Error(e);
                 isProduction() ? process.exit(1) : stream.end();
             })
-            .pipe($.googleWebfonts(Object.assign({}, options,
+            .pipe($.googleWebfonts(Object.assign({}, optionsFonts,
                 {
                     cssFilename: 'fontsEot.css',
                     format: 'eot'
@@ -110,13 +111,33 @@ gulp.task('googleFonts', gulp.series(
                 throw new Error(e);
                 isProduction() ? process.exit(1) : stream.end();
             })
-            .pipe($.googleWebfonts(Object.assign({}, options,
+            .pipe($.googleWebfonts(Object.assign({}, optionsFonts,
                 {
                     cssFilename: 'fontsTtf.css',
                     format: 'ttf'
                 })
             ))
             .pipe(gulp.dest(dist))
+            .on('finish', ()=>{
+                callback();
+            });
+    },
+    (callback) => {
+        let stram = gulp.src(dist + '/google/*.css');
+
+        stram
+            .on('error', (e) => {
+                throw new Error(e);
+                isProduction() ? process.exit(1) : stream.end();
+            })
+            .pipe($.modifyCssUrls({
+                modify(url, filePath) {
+                    return url;
+                },
+                prepend: config.publicPath.fonts.root,
+                append: '?ver=' +  Math.random().toString(36).substring(7) // pridam klic
+            }))
+            .pipe(gulp.dest(dist + '/google'))
             .on('finish', ()=>{
                 callback();
             });
