@@ -29,11 +29,10 @@ gulp.task('extendsjs', (callback) => {
 
     stream
         .pipe($.plumber({
-            errorHandler: handler.error,
+            errorHandler: (error) => {
+                handler.error(error, callback);
+            },
         }))
-        // .on('error', (error) => {
-        //     console.error(error)
-        // })
         // source maps init
         .pipe(
             isProduction()

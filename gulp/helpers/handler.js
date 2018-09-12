@@ -7,7 +7,7 @@ import isProduction from './isProduction';
 const $ = plugins();
 
 let handler = {
-    error: (error) => {
+    error: (error, callback) => {
         let report = '\n',
             notifyMessage;
 
@@ -17,6 +17,14 @@ let handler = {
 
         if (error.message) {
             report += 'ERROR:' + ' ' + error.message + '\n';
+        }
+
+        if (error.line) {
+            report += 'Line:' + ' ' + error.line + '\n';
+        }
+
+        if (error.extract) {
+            report += 'Extract:' + '\n' + error.extract.join('\n') + '\n';
         }
 
         console.error(report);
@@ -40,6 +48,8 @@ let handler = {
          */
         if(isProduction()) {
             process.exit(1);
+        } else if (typeof callback === 'function') {
+            callback();
         }
 
     }

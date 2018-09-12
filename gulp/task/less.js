@@ -47,11 +47,10 @@ gulp.task('less', (callback) => {
     stream
         //nastavim plumber a v pripade chyby volam callback onError
         .pipe($.plumber({
-            errorHandler: handler.error,
+            errorHandler: (error) => {
+                handler.error(error, callback);
+            },
         }))
-        // .on('error', (error) => {
-        //     console.error(error)
-        // })
         //sourcemaps init
         .pipe(
         isProduction()
