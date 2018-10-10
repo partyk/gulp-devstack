@@ -11,7 +11,7 @@
     }
   },
   "rules": {
-    "indent": [1, 4],
+    "indent": [2, 4, { "SwitchCase": 1 }],
     "semi": [2, "always", { "omitLastInOneLineBlock": true }],
     "quotes": [2, "single", { "allowTemplateLiterals": true }],
     "eol-last": 0,
