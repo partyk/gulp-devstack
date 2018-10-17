@@ -12,7 +12,7 @@ gulp.registry(hub);
 
 //default task
 gulp.task('default', 
-    gulp.series('clean',
+    gulp.series('clean', 'download',
         gulp.parallel( 
             'imagemin',
             gulp.series('bowerfix', 'iconfont', 'less', 'sass', 'watch'),

@@ -142,6 +142,8 @@ let optionsJs = {
     ]
 };
 
+const downloadFiles = ["https://1gr.cz/css/idn3/reklama.css"];
+
 module.exports = {
     optionsApp: optionsApp,
     basePath: basePath,
@@ -153,5 +155,6 @@ module.exports = {
     browser: browser,
     fontSize: fontSize,
     optionsUglify: optionsUglify,
-    optionsJs: optionsJs
+    optionsJs: optionsJs,
+    downloadFiles: downloadFiles
 };
