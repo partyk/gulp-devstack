@@ -42,7 +42,7 @@ gulp.task('imagemin', (callback) => {
             ],
             config.dist.images.root,
             callback
-        ]
+        ];
 
     streamImageMin(...options);
 });
