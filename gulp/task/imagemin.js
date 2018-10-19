@@ -6,10 +6,10 @@ let imagemin = require('gulp-imagemin');
 let jpegoptim = require('imagemin-jpegoptim');
 let pngquant = require('imagemin-pngquant');
 
-const streamImageMin = (src, dist, callback, name) => {
+const streamImageMin = (name, src, dist, callback) => {
     console.info(`${name} > minifying of images`);
 
-    let stream = gulp.src(src.globs, src.options);
+    let stream = gulp.src(...src);
 
     stream
         .on('error', (e) => {
@@ -28,18 +28,21 @@ const streamImageMin = (src, dist, callback, name) => {
 }
 
 gulp.task('imagemin', (callback) => {
-    const src = {
-        globs: [
-            '**/*.{png,jpg,gif,svg,ico}',
-            //'!' + config.app.images.extends,
-        ],
-        options: {
-            cwd: config.app.images.root,
-            // since: gulp.lastRun('imagemin') // This option takes a timestamp, and gulp.src will filter files that are older than the given time.
-        }
-    };
+    const options = [
+            'Imagemin',
+            [
+                [
+                    '**/*.{png,jpg,gif,svg,ico}',
+                    //'!' + config.app.images.extends,
+                ],
+                {
+                    cwd: config.app.images.root,
+                    // since: gulp.lastRun('imagemin') // This option takes a timestamp, and gulp.src will filter files that are older than the given time.
+                }
+            ],
+            config.dist.images.root,
+            callback
+        ]
 
-    const dist = config.dist.images.root;
-
-    streamImageMin(src, dist, callback, 'Imagemin');
+    streamImageMin(...options);
 });
