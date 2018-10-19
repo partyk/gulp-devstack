@@ -3,21 +3,15 @@ const console = require('better-console');
 
 const gulp = require('gulp');
 
+const copy = require('copy');
+
 const plugins = require('gulp-load-plugins');
 
 const $ = plugins();
 
-const streamCopy = (name, src, dist, callback, options = {prefix: 1}) => {
+const streamCopy = (name, src, dist, callback) => {
     console.info(`${name} > copy of files`);
-
-    console.log(src);
-
-    let stream = gulp.src(...src);
-
-    stream
-        .pipe($.copy(dist, options))
-
-    callback();
+    copy(src, dist, callback);
 }
 
 gulp.task('copy', (callback) => {
