@@ -6,6 +6,17 @@ let optionsApp = {
     }
 };
 
+const domain = {
+    production : {
+        main: '',
+        assets: ''
+    },
+    devel : {
+        main: '',
+        assets: ''
+    }
+};
+
 let dirName = {
     root: '/',
     temp: 'temp',
@@ -146,6 +157,7 @@ const downloadFiles = ["https://1gr.cz/css/idn3/reklama.css"];
 
 module.exports = {
     optionsApp: optionsApp,
+    domain: domain,
     basePath: basePath,
     publicPath: publicPath,
     app: app,
