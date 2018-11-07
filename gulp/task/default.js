@@ -15,10 +15,15 @@ gulp.task('default',
     gulp.series('clean', 'download',
         gulp.parallel( 
             'imagemin',
-            gulp.series('bowerfix', 'iconfont', 'less', 'sass', 'watch'),
+            gulp.series('bowerfix', 'iconfont', 'less', 'sass'),
             gulp.series('extendsjs'),
             gulp.series('webpack')
         ),
+        'watch',
+        (callback) => {
+            callback();
+            isProduction() ? process.exit(0) : '';
+        }
     )
 );
 
