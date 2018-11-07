@@ -8,122 +8,72 @@ let plugins = require('gulp-load-plugins');
 
 const $ = plugins();
 
-let optionsFonts = {
-    // embed: false,
-    fontsDir: 'google',
-    cssDir: 'google'
+const streamGoogleFont = (src, dist, options, callback) => {
+    options = {
+        ...{
+            // embed: false,
+            fontsDir: 'google',
+            cssDir: 'google'
+        },
+        ...options
+    };
+
+    console.info(`Google fonts format: ${options.format.toUpperCase()}`);
+
+    const stream = gulp.src(src);
+
+    stream
+        .on('error', (e) => {
+            throw new Error(e);
+            isProduction() ? process.exit(1) : stream.end();
+        })
+        .pipe($.googleWebfonts(options))
+        .pipe(gulp.dest(dist))
+        .on('finish', ()=>{
+            callback();
+        });
 };
 
-let src = config.app.fonts.root + 'googleFonts/fonts.list';
-let dist = config.dist.fonts.root;
+const src = config.app.fonts.root + 'googleFonts/fonts.list';
+const dist = config.dist.fonts.root;
 
-gulp.task('googleFonts', gulp.series(
+gulp.task('googleFonts', gulp.parallel(
     (callback) => {
         console.info('Google fonts');
         callback();
     },
     (callback) => {
-        console.info('Google fonts format: WOFF');
-        let stream = gulp.src(src);
-
-        stream
-            .on('error', (e) => {
-                throw new Error(e);
-                isProduction() ? process.exit(1) : stream.end();
-            })
-            .pipe($.googleWebfonts(Object.assign({}, optionsFonts,
-                {
-                    cssFilename: 'fontsWoff.css',
-                    format: 'woff'
-                })
-            ))
-            .pipe(gulp.dest(dist))
-            .on('finish', ()=>{
-                callback();
-            });
+        streamGoogleFont(src, dist, {
+            cssFilename: 'fontsWoff.css',
+            format: 'woff'
+        }, callback)
     },
     (callback) => {
-        console.info('Google fonts format: WOFF2');
-        let stream = gulp.src(src);
-
-        stream
-            .on('error', (e) => {
-                throw new Error(e);
-                isProduction() ? process.exit(1) : stream.end();
-            })
-            .pipe($.googleWebfonts(Object.assign({}, optionsFonts,
-                {
-                    cssFilename: 'fontsWoff2.css',
-                    format: 'woff2'
-                })
-            ))
-            .pipe(gulp.dest(dist))
-            .on('finish', ()=>{
-                callback();
-            });
+        streamGoogleFont(src, dist, {
+            cssFilename: 'fontsWoff2.css',
+            format: 'woff2'
+        }, callback)
     },
     (callback) => {
-        console.info('Google fonts format: SVG');
-        let stream = gulp.src(src);
-
-        stream
-            .on('error', (e) => {
-                throw new Error(e);
-                isProduction() ? process.exit(1) : stream.end();
-            })
-            .pipe($.googleWebfonts(Object.assign({}, optionsFonts,
-                {
-                    cssFilename: 'fontsSvg.css',
-                    format: 'svg'
-                })
-            ))
-            .pipe(gulp.dest(dist))
-            .on('finish', ()=>{
-                callback();
-            });
+        streamGoogleFont(src, dist, {
+            cssFilename: 'fontsSvg.css',
+            format: 'svg'
+        }, callback)
     },
     (callback) => {
-        console.info('Google fonts format: EOT');
-        let stream = gulp.src(src);
-
-        stream
-            .on('error', (e) => {
-                throw new Error(e);
-                isProduction() ? process.exit(1) : stream.end();
-            })
-            .pipe($.googleWebfonts(Object.assign({}, optionsFonts,
-                {
-                    cssFilename: 'fontsEot.css',
-                    format: 'eot'
-                })
-            ))
-            .pipe(gulp.dest(dist))
-            .on('finish', ()=>{
-                callback();
-            });
+        streamGoogleFont(src, dist, {
+            cssFilename: 'fontsEot.css',
+            format: 'eot'
+        }, callback)
     },
     (callback) => {
-        console.info('Google fonts format: TTF');
-        let stream = gulp.src(src);
-
-        stream
-            .on('error', (e) => {
-                throw new Error(e);
-                isProduction() ? process.exit(1) : stream.end();
-            })
-            .pipe($.googleWebfonts(Object.assign({}, optionsFonts,
-                {
-                    cssFilename: 'fontsTtf.css',
-                    format: 'ttf'
-                })
-            ))
-            .pipe(gulp.dest(dist))
-            .on('finish', ()=>{
-                callback();
-            });
+        streamGoogleFont(src, dist, {
+            cssFilename: 'fontsTtf.css',
+            format: 'ttf'
+        }, callback)
     },
     (callback) => {
-        let stram = gulp.src(dist + '/google/*.css');
+        let stram = gulp.src(dist + '/**/*.css');
 
         stram
             .on('error', (e) => {
@@ -137,7 +87,7 @@ gulp.task('googleFonts', gulp.series(
                 prepend: config.publicPath.fonts.root,
                 append: '?ver=' +  Math.random().toString(36).substring(7) // pridam klic
             }))
-            .pipe(gulp.dest(dist + '/google'))
+            .pipe(gulp.dest(dist))
             .on('finish', ()=>{
                 callback();
             });
