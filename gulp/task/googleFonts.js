@@ -37,42 +37,46 @@ const streamGoogleFont = (src, dist, options, callback) => {
 const src = config.app.fonts.root + 'googleFonts/fonts.list';
 const dist = config.dist.fonts.root;
 
-gulp.task('googleFonts', gulp.parallel(
+gulp.task('googleFonts', gulp.series(
     (callback) => {
         console.info('Google fonts');
         callback();
     },
+    gulp.parallel(
+        (callback) => {
+            streamGoogleFont(src, dist, {
+                cssFilename: 'fontsWoff.css',
+                format: 'woff'
+            }, callback)
+        },
+        (callback) => {
+            streamGoogleFont(src, dist, {
+                cssFilename: 'fontsWoff2.css',
+                format: 'woff2'
+            }, callback)
+        },
+        (callback) => {
+            streamGoogleFont(src, dist, {
+                cssFilename: 'fontsSvg.css',
+                format: 'svg'
+            }, callback)
+        },
+        (callback) => {
+            streamGoogleFont(src, dist, {
+                cssFilename: 'fontsEot.css',
+                format: 'eot'
+            }, callback)
+        },
+        (callback) => {
+            streamGoogleFont(src, dist, {
+                cssFilename: 'fontsTtf.css',
+                format: 'ttf'
+            }, callback)
+        }
+    ),
     (callback) => {
-        streamGoogleFont(src, dist, {
-            cssFilename: 'fontsWoff.css',
-            format: 'woff'
-        }, callback)
-    },
-    (callback) => {
-        streamGoogleFont(src, dist, {
-            cssFilename: 'fontsWoff2.css',
-            format: 'woff2'
-        }, callback)
-    },
-    (callback) => {
-        streamGoogleFont(src, dist, {
-            cssFilename: 'fontsSvg.css',
-            format: 'svg'
-        }, callback)
-    },
-    (callback) => {
-        streamGoogleFont(src, dist, {
-            cssFilename: 'fontsEot.css',
-            format: 'eot'
-        }, callback)
-    },
-    (callback) => {
-        streamGoogleFont(src, dist, {
-            cssFilename: 'fontsTtf.css',
-            format: 'ttf'
-        }, callback)
-    },
-    (callback) => {
+        console.info(`Google fonts modify urls`);
+
         let stram = gulp.src(dist + '/**/*.css');
 
         stram
