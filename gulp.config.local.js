@@ -1,9 +1,8 @@
-let optionsApp = {
-    develop: {
-        browserSync: true,
-    }
-}
+const domain = {
+    main: '',
+    assets: ''
+};
 
 module.exports = {
-    optionsApp: optionsApp
+    domain: domain
 };

@@ -7,14 +7,8 @@ let optionsApp = {
 };
 
 const domain = {
-    production : {
-        main: '',
-        assets: ''
-    },
-    devel : {
-        main: '',
-        assets: ''
-    }
+    main: '',
+    assets: ''
 };
 
 let dirName = {
