@@ -15,7 +15,6 @@ gulp.task('less', (callback) => {
     //nastavim config pro sass stream
     let settings = {
         postCssPlugins: [
-            require('postcss-csscomb')('zen'),
             require('postcss-discard-duplicates')(),
             require('pixrem')({ rootValue: config.fontSize }), // rem -> px fallback, defaultni hodnota pro vypocet je 10px
             require('autoprefixer')({ browsers: config.browser }), // pridani prefixu
