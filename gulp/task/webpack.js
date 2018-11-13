@@ -36,7 +36,7 @@ gulp.task('webpack', function (callback) {
         output: {
             path: path.resolve(config.dist.scripts.root),
             filename: '[name].js',
-            publicPath: (isProduction() ? config.domain.production.assets : config.domain.assets) + '/js/', //nastaveni cesty k chunkum
+            publicPath: config.domain.assets + '/js/', //nastaveni cesty k chunkum
             chunkFilename: 'chunks/[name].chunk.js',
         },
         module: {
