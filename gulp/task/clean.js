@@ -1,5 +1,4 @@
 let config = require('./../helpers/getConfig');
-let isProduction = require('./../helpers/isProduction');
 
 let console = require('better-console');
 let fs = require('fs');
@@ -11,27 +10,26 @@ const $ = plugins();
 
 gulp.task('clean', (callback) => {
 
-    let stop = false;
-
-    if (!fs.existsSync(config.basePath.dist)) {
-        console.warn('Clean warn -> directory "' + config.basePath.dist + '" not exist!');
-        console.info('Create > ' + config.basePath.dist);
-        fs.mkdirSync(config.basePath.dist);
-        stop = true;
+    // create directory temp
+    if (!fs.existsSync(config.dirName.temp)) {
+        console.warn('Directory "' + config.dirName.temp + '" not exist!');
+        console.info('Create > ' + config.dirName.temp);
+        fs.mkdirSync(config.dirName.temp);
     }
 
+    // create directory temp/gulp
     if (!fs.existsSync(config.basePath.temp)) {
         console.warn('Clean warn -> directory "' + config.basePath.temp + '" not exist!');
         console.info('Create > ' + config.basePath.temp);
         fs.mkdirSync(config.basePath.temp);
-        stop = true;
-    } else {
-        stop = false;
-    }
-    if (stop) {
-        callback();
     }
 
+    // create directory dist
+    if (!fs.existsSync(config.basePath.dist)) {
+        console.warn('Clean warn -> directory "' + config.basePath.dist + '" not exist!');
+        console.info('Create > ' + config.basePath.dist);
+        fs.mkdirSync(config.basePath.dist);
+    }
 
     console.info('Delete directory.');
 
