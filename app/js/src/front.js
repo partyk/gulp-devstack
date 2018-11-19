@@ -1,5 +1,5 @@
 // auto load polyfill for babel
-// import "babel-polyfill";
+// import '@babel/polyfill';
 
 import '../module/test';
 
@@ -10,4 +10,13 @@ let aaa = Object.assign({}, {
     'bbb': 'aaaa'
 });
 
-console.log(aaa);
+let bbb = {
+    ...{
+        'aaa': 'aaa'
+    },
+    ...{
+        'bbb': 'aaaa'
+    }
+};
+
+console.log(aaa, bbb);
