@@ -55,7 +55,7 @@
     "eslint-loader": "^2.1.1",
     "expose-loader": "^0.7.5",
     "gulp": "^4.0.0",
-    "gulp-babel": "^7.0.1",
+    "gulp-babel": "^8.0.0",
     "gulp-bower-fix-css-path": "0.0.2",
     "gulp-clean": "^0.4.0",
     "gulp-cli": "^2.0.0",
