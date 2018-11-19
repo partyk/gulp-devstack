@@ -1,15 +1,14 @@
-let plugins = require('gulp-load-plugins');
-let beeper = require('beeper');
-let console = require('better-console');
-
-import isProduction from './isProduction';
+const plugins = require('gulp-load-plugins');
+const beeper = require('beeper');
+const console = require('better-console');
+const isProduction = require('./isProduction');
 
 const $ = plugins();
 
 let handler = {
     error: (error, callback) => {
-        let report = '\n',
-            notifyMessage;
+        let report = '\n';
+        let notifyMessage;
 
         if (error.plugin) {
             report += 'PLUGIN:' + ' [' + error.plugin + ']\n';
@@ -46,12 +45,11 @@ let handler = {
         /**
          * in production mode is process stopped
          */
-        if(isProduction()) {
+        if (isProduction()) {
             process.exit(1);
         } else if (typeof callback === 'function') {
             callback();
         }
-
     }
 };
 

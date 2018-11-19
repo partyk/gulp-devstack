@@ -1,5 +1,3 @@
-import shell from "gulp-shell";
-
 let config = require('./../helpers/getConfig');
 let console = require('better-console');
 
@@ -13,18 +11,18 @@ let pngquant = require('imagemin-pngquant');
 const $ = plugins();
 
 gulp.task('bowerfix', gulp.series(
-     $.shell.task('npm run bower-installer'),
+    $.shell.task('npm run bower-installer'),
     (callback) => {
 
         let options = {
-            "debug":false,
+            "debug": false,
             "absolutePath": config.publicPath.root,
-            "types":{
-                "fonts":{
+            "types": {
+                "fonts": {
                     extensions: [".eot", ".woff", ".ttf", ".woff2"],
                     prefixPath: config.dirName.fonts + "/" + config.dirName.extends + "/"
                 },
-                "imgs":{
+                "imgs": {
                     extensions: [".png", ".jpg", ".gif", ".jpeg", ".svg"],
                     prefixPath: config.dirName.images + "/" + config.dirName.extends + "/"
                 }
@@ -44,7 +42,7 @@ gulp.task('bowerfix', gulp.series(
             .pipe(gulp.dest(function (file) {
                 return file.base;
             }))
-            .on('finish', ()=>{
+            .on('finish', () => {
                 callback();
             });
     },

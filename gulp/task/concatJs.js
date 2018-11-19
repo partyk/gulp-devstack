@@ -13,8 +13,8 @@ gulp.task('dependencyJs', (callBack) => {
 
     if (config.concatJs.dependencyJs.files.length === 0) {
         console.warn('Concat dependency warn -> Mising files for concat!');
-        callBack();  
-        return;     
+        callBack();
+        return;
     }
 
     let dist = config.dist.scripts.static + config.concatJs.dependencyJs.name;
@@ -22,12 +22,12 @@ gulp.task('dependencyJs', (callBack) => {
     let stream = gulp.src(config.concatJs.dependencyJs.files);
 
     stream
-        //nastavim plumber a v pripade chyby volam callback onError
+        // nastavim plumber a v pripade chyby volam callback onError
         .on('error', (e) => {
             throw new Error(e);
             stream.end();
         })
-        //sourcemaps init
+        // sourcemaps init
         .pipe(
             isProduction()
                 ? $.noop()
@@ -39,13 +39,13 @@ gulp.task('dependencyJs', (callBack) => {
                 //mode: 0666 
             }
         }))
-        //vygeneruji sourcemaps
+        // vygeneruji sourcemaps
         .pipe(
             isProduction()
                 ? $.noop()
                 : $.sourcemaps.write('./')
         )
-        //vygeneruji soubor
+        // vygeneruji soubor
         .pipe(gulp.dest(dist))
         .on('finish', callback);
 });

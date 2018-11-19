@@ -33,7 +33,7 @@ gulp.task('clean', (callback) => {
 
     console.info('Delete directory.');
 
-    let stream = gulp.src([config.basePath.dist, config.basePath.temp], { read: false });
+    let stream = gulp.src([config.basePath.dist, config.basePath.temp], {read: false});
 
     stream
         .on('error', (e) => {
@@ -41,12 +41,12 @@ gulp.task('clean', (callback) => {
             stream.end();
         })
         .pipe($.clean())
-        .on('finish', ()=>{
-            if (!fs.existsSync(config.basePath.dist)){
+        .on('finish', () => {
+            if (!fs.existsSync(config.basePath.dist)) {
                 console.info('Create > ' + config.basePath.dist);
-                fs.mkdirSync(config.basePath.dist);    
+                fs.mkdirSync(config.basePath.dist);
             }
-            if (!fs.existsSync(config.basePath.temp)){
+            if (!fs.existsSync(config.basePath.temp)) {
                 console.info('Create > ' + config.basePath.temp);
                 fs.mkdirSync(config.basePath.temp);
             }
