@@ -1,15 +1,14 @@
-let config = require('./../helpers/getConfig');
+const config = require('./../helpers/getConfig');
 
-let console = require('better-console');
-let fs = require('fs');
-let gulp = require('gulp');
+const console = require('better-console');
+const fs = require('fs');
+const gulp = require('gulp');
 
-let plugins = require('gulp-load-plugins');
+const plugins = require('gulp-load-plugins');
 
 const $ = plugins();
 
 gulp.task('clean', (callback) => {
-
     // create directory temp
     if (!fs.existsSync(config.dirName.temp)) {
         console.warn('Directory "' + config.dirName.temp + '" not exist!');
@@ -31,14 +30,14 @@ gulp.task('clean', (callback) => {
         fs.mkdirSync(config.basePath.dist);
     }
 
-    console.info('Delete directory.');
+    console.info('Deconste directory.');
 
-    let stream = gulp.src([config.basePath.dist, config.basePath.temp], {read: false});
+    const stream = gulp.src([config.basePath.dist, config.basePath.temp], {read: false});
 
     stream
         .on('error', (e) => {
             throw new Error(e);
-            stream.end();
+            process.exit(1); // eslint-disable-line
         })
         .pipe($.clean())
         .on('finish', () => {

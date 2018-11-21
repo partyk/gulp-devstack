@@ -1,10 +1,8 @@
-import isProduction from "../helpers/isProduction";
+const config = require('./../helpers/getConfig');
+const console = require('better-console');
 
-let config = require('./../helpers/getConfig');
-let console = require('better-console');
-
-let gulp = require('gulp');
-let plugins = require('gulp-load-plugins');
+const gulp = require('gulp');
+const plugins = require('gulp-load-plugins');
 
 const $ = plugins();
 
@@ -25,11 +23,11 @@ const streamGoogleFont = (src, dist, options, callback) => {
     stream
         .on('error', (e) => {
             throw new Error(e);
-            isProduction() ? process.exit(1) : stream.end();
+            process.exit(1);  // eslint-disable-line
         })
         .pipe($.googleWebfonts(options))
         .pipe(gulp.dest(dist))
-        .on('finish', ()=>{
+        .on('finish', () => {
             callback();
         });
 };
@@ -47,31 +45,31 @@ gulp.task('googleFonts', gulp.series(
             streamGoogleFont(src, dist, {
                 cssFilename: 'fontsWoff.css',
                 format: 'woff'
-            }, callback)
+            }, callback);
         },
         (callback) => {
             streamGoogleFont(src, dist, {
                 cssFilename: 'fontsWoff2.css',
                 format: 'woff2'
-            }, callback)
+            }, callback);
         },
         (callback) => {
             streamGoogleFont(src, dist, {
                 cssFilename: 'fontsSvg.css',
                 format: 'svg'
-            }, callback)
+            }, callback);
         },
         (callback) => {
             streamGoogleFont(src, dist, {
                 cssFilename: 'fontsEot.css',
                 format: 'eot'
-            }, callback)
+            }, callback);
         },
         (callback) => {
             streamGoogleFont(src, dist, {
                 cssFilename: 'fontsTtf.css',
                 format: 'ttf'
-            }, callback)
+            }, callback);
         }
     ),
     (callback) => {
@@ -82,17 +80,17 @@ gulp.task('googleFonts', gulp.series(
         stram
             .on('error', (e) => {
                 throw new Error(e);
-                isProduction() ? process.exit(1) : stream.end();
+                process.exit(1); // eslint-disable-line
             })
             .pipe($.modifyCssUrls({
                 modify(url, filePath) {
                     return url;
                 },
                 prepend: config.publicPath.fonts.root,
-                append: '?ver=' +  Math.random().toString(36).substring(7) // pridam klic
+                append: '?ver=' + Math.random().toString(36).substring(7) // pridam klic
             }))
             .pipe(gulp.dest(dist))
-            .on('finish', ()=>{
+            .on('finish', () => {
                 callback();
             });
     }

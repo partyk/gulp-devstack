@@ -1,19 +1,18 @@
 'use strict';
-import config from '../helpers/getConfig'
-import isProduction from '../helpers/isProduction'
+import config from '../helpers/getConfig';
+import isProduction from '../helpers/isProduction';
 import gulp from 'gulp';
 import console from 'better-console';
 import HubRegistry from 'gulp-hub';
-import shell from 'gulp-shell';
 
-let hub = new HubRegistry(['./*.js']);
+const hub = new HubRegistry(['./*.js']);
 
 gulp.registry(hub);
 
-//default task
-gulp.task('default', 
+// default task
+gulp.task('default',
     gulp.series('clean', 'download',
-        gulp.parallel( 
+        gulp.parallel(
             'imagemin',
             gulp.series('bowerfix', 'iconfont', 'less', 'sass'),
             gulp.series('extendsjs'),
@@ -22,12 +21,14 @@ gulp.task('default',
         'watch',
         (callback) => {
             callback();
-            isProduction() ? process.exit(0) : '';
+            if (isProduction()) {
+                process.exit(0); // eslint-disable-line
+            }
         }
     )
 );
 
-//watch
+// watch
 gulp.task('watch', (callback) => {
     if (isProduction()) {
         callback();
@@ -36,16 +37,15 @@ gulp.task('watch', (callback) => {
 
     console.info('Watch > start');
 
-    //sass
+    // sass
     gulp.watch(config.app.sass.root + '**/*.+(scss|sass)', gulp.parallel('sass'));
 
-    //less
+    // less
     gulp.watch(config.app.less.root + '**/*.less', gulp.parallel('less'));
 
-    //extends
+    // extends
     gulp.watch([...config.optionsJs.extends], gulp.parallel('extendsjs'));
 
-    //images
+    // images
     gulp.watch(config.app.images.root + '**/*.{png,jpg,gif,svg,ico}', gulp.parallel('imagemin'));
-
 });

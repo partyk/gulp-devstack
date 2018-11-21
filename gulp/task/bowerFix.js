@@ -1,30 +1,29 @@
-let config = require('./../helpers/getConfig');
-let console = require('better-console');
+const config = require('./../helpers/getConfig');
+const console = require('better-console');
 
-let gulp = require('gulp');
-let plugins = require('gulp-load-plugins');
+const gulp = require('gulp');
+const plugins = require('gulp-load-plugins');
 
-let imagemin = require('gulp-imagemin');
-let jpegoptim = require('imagemin-jpegoptim');
-let pngquant = require('imagemin-pngquant');
+const imagemin = require('gulp-imagemin');
+const jpegoptim = require('imagemin-jpegoptim');
+const pngquant = require('imagemin-pngquant');
 
 const $ = plugins();
 
 gulp.task('bowerfix', gulp.series(
     $.shell.task('npm run bower-installer'),
     (callback) => {
-
         let options = {
-            "debug": false,
-            "absolutePath": config.publicPath.root,
-            "types": {
-                "fonts": {
-                    extensions: [".eot", ".woff", ".ttf", ".woff2"],
-                    prefixPath: config.dirName.fonts + "/" + config.dirName.extends + "/"
+            'debug': false,
+            'absolutePath': config.publicPath.root,
+            'types': {
+                'fonts': {
+                    extensions: ['.eot', '.woff', '.ttf', '.woff2'],
+                    prefixPath: config.dirName.fonts + '/' + config.dirName.extends + '/'
                 },
-                "imgs": {
-                    extensions: [".png", ".jpg", ".gif", ".jpeg", ".svg"],
-                    prefixPath: config.dirName.images + "/" + config.dirName.extends + "/"
+                'imgs': {
+                    extensions: ['.png', '.jpg', '.gif', '.jpeg', '.svg'],
+                    prefixPath: config.dirName.images + '/' + config.dirName.extends + '/'
                 }
             }
         };
@@ -36,7 +35,7 @@ gulp.task('bowerfix', gulp.series(
         stream
             .on('error', (e) => {
                 throw new Error(e);
-                stream.end();
+                process.exit(1); // eslint-disable-line
             })
             .pipe($.bowerFixCssPath(options))
             .pipe(gulp.dest(function (file) {
@@ -57,11 +56,11 @@ gulp.task('bowerfix', gulp.series(
             })
             .pipe(imagemin([
                 jpegoptim({
-                    progressive: true,
+                    progressive: true
                 }),
                 pngquant(),
                 imagemin.gifsicle(),
-                imagemin.svgo(),
+                imagemin.svgo()
             ]))
             .pipe($.rename({dirname: ''})) // remove a folder structure in stream
             .pipe(gulp.dest(config.dist.images.extends))

@@ -8,7 +8,7 @@ const copy = require('copy');
 const streamCopy = (name, src, dist, callback) => {
     console.info(`${name} > copy of files`);
     copy(src, dist, callback);
-}
+};
 
 gulp.task('copy', (callback) => {
     const options = [

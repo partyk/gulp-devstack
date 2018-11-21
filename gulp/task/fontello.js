@@ -1,38 +1,33 @@
-let config = require('./../helpers/getConfig');
-let isProduction = require('./../helpers/isProduction');
-let console = require('better-console');
+const config = require('./../helpers/getConfig');
+const console = require('better-console');
 
-let fs = require('fs');
-let path = require('path');
-let gulp = require('gulp');
-let plugins = require('gulp-load-plugins');
+const fs = require('fs');
+const gulp = require('gulp');
+const plugins = require('gulp-load-plugins');
 
 const $ = plugins();
 
 gulp.task('fontello', (callback) => {
     console.info('Fontello > create icons font');
 
-    let options = {
-    }
-    
-    let src = config.app.fonts.root + 'fontello/config.json';
-    
-    let dist = config.dist.fonts.root + 'fontello/';
+    const options = {};
+
+    const src = config.app.fonts.root + 'fontello/config.json';
+
+    const dist = config.dist.fonts.root + 'fontello/';
 
     if (!fs.existsSync(src)) {
         console.warn('Warn: missing config.json of Fontello');
-        return;
         callback();
+        return;
     }
 
-    let failed = false;
-
-    let stream = gulp.src(src);
+    const stream = gulp.src(src);
 
     stream
         .on('error', (e) => {
             throw new Error(e);
-            stream.end();
+            process.exit(1); // eslint-disable-line
         })
         .pipe($.fontello(options))
         .pipe(gulp.dest(dist))

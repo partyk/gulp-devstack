@@ -1,29 +1,28 @@
-let config = require('./../helpers/getConfig');
-let isProduction = require('./../helpers/isProduction');
-let handler = require('./../helpers/handler');
-let console = require('better-console');
+const config = require('./../helpers/getConfig');
+const isProduction = require('./../helpers/isProduction');
+const handler = require('./../helpers/handler');
+const console = require('better-console');
 
-let gulp = require('gulp');
-let plugins = require('gulp-load-plugins');
+const gulp = require('gulp');
+const plugins = require('gulp-load-plugins');
 
 const $ = plugins();
 
-let fs = require("fs");
+const fs = require('fs');
 
 gulp.task('extendsjs', (callback) => {
-
     console.info('Extends JavaScript');
 
     // load options from .babelrc
-    let babelrc = JSON.parse(fs.readFileSync('.babelrc'));
+    const babelrc = JSON.parse(fs.readFileSync('.babelrc'));
 
     // source path for javascript
-    let src = config.optionsJs.extends;
+    const src = config.optionsJs.extends;
 
     // target part for javascript
-    let dist = config.dist.scripts.extends;
+    const dist = config.dist.scripts.extends;
 
-    let stream = gulp.src(src, {
+    const stream = gulp.src(src, {
         // since: gulp.lastRun('extendsjs') // This option takes a timestamp, and gulp.src will filter files that are older than the given time.
     });
 
@@ -31,7 +30,7 @@ gulp.task('extendsjs', (callback) => {
         .pipe($.plumber({
             errorHandler: (error) => {
                 handler.error(error, callback);
-            },
+            }
         }))
         // source maps init
         .pipe(

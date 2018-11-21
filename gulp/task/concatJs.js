@@ -1,14 +1,13 @@
-let config = require('./../helpers/getConfig');
-let isProduction = require('./../helpers/isProduction');
-let console = require('better-console');
+const config = require('./../helpers/getConfig');
+const isProduction = require('./../helpers/isProduction');
+const console = require('better-console');
 
-let gulp = require('gulp');
-let plugins = require('gulp-load-plugins');
+const gulp = require('gulp');
+const plugins = require('gulp-load-plugins');
 
 const $ = plugins();
 
 gulp.task('dependencyJs', (callBack) => {
-
     console.info('Concat > ' + config.concatJs.dependencyJs.name);
 
     if (config.concatJs.dependencyJs.files.length === 0) {
@@ -17,15 +16,15 @@ gulp.task('dependencyJs', (callBack) => {
         return;
     }
 
-    let dist = config.dist.scripts.static + config.concatJs.dependencyJs.name;
+    const dist = config.dist.scripts.static + config.concatJs.dependencyJs.name;
 
-    let stream = gulp.src(config.concatJs.dependencyJs.files);
+    const stream = gulp.src(config.concatJs.dependencyJs.files);
 
     stream
-        // nastavim plumber a v pripade chyby volam callback onError
+    // nastavim plumber a v pripade chyby volam callback onError
         .on('error', (e) => {
             throw new Error(e);
-            stream.end();
+            process.exit(1); // eslint-disable-line
         })
         // sourcemaps init
         .pipe(
@@ -36,7 +35,7 @@ gulp.task('dependencyJs', (callBack) => {
         .pipe($.concat({
             path: dist,
             stat: {
-                //mode: 0666 
+                // mode: 0666
             }
         }))
         // vygeneruji sourcemaps
@@ -47,5 +46,5 @@ gulp.task('dependencyJs', (callBack) => {
         )
         // vygeneruji soubor
         .pipe(gulp.dest(dist))
-        .on('finish', callback);
+        .on('finish', callBack);
 });
