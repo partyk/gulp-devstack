@@ -1,3 +1,4 @@
+// @flow
 // auto load polyfill for babel
 // import '@babel/polyfill';
 
@@ -20,3 +21,9 @@ let bbb = {
 };
 
 console.log(aaa, bbb);
+
+function square(n: string): string {
+    return n;
+}
+
+square('2');

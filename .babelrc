@@ -9,7 +9,8 @@
                     "last 3 versions"
                 ]
             }
-        }]
+        }],
+        "@babel/preset-flow"
     ],
     "plugins": [
         "@babel/plugin-syntax-object-rest-spread",

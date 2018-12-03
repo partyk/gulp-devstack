@@ -7,6 +7,7 @@ const webpack = require('webpack');
 const gulp = require('gulp');
 const plugins = require('gulp-load-plugins');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const FlowWebpackPlugin = require('flow-webpack-plugin');
 
 const $ = plugins();
 
@@ -43,11 +44,27 @@ gulp.task('webpack', function (callback) {
                 {
                     test: /\.js(x)?$/,
                     exclude: /node_modules|bower_components/,
-                    use: ['babel-loader', 'eslint-loader']
+                    use: [{
+                        loader: 'babel-loader',
+                        options: {
+                            cacheDirectory: true // WARNING: can cause babel-loader errors
+                        }
+                    }, {
+                        loader: 'eslint-loader',
+                        options: {
+                            cache: true,
+                            emitWarning: true
+                        }
+                    }]
                 }
             ]
         },
-        plugins: [],
+        plugins: [
+            new FlowWebpackPlugin({
+                failOnError: false,
+                reportingSeverity: 'warning'
+            })
+        ],
         profile: true,
         watch: !isProduction(),
         watchOptions: {

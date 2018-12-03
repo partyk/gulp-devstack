@@ -1,0 +1,25 @@
+[ignore]
+<PROJECT_ROOT>/webpack/info/*
+<PROJECT_ROOT>/dist
+<PROJECT_ROOT>/node_modules
+
+[include]
+./app/**/*
+
+[libs]
+
+[lints]
+all=warn
+
+[declarations]
+
+[options]
+emoji=true
+include_warnings=true
+module.use_strict=true
+module.file_ext=.js
+module.name_mapper='^~/\(.*\)$' -> '<PROJECT_ROOT>/app/\1'
+
+suppress_comment= \\(.\\|\n\\)*\\$FlowFixMe
+suppress_comment= \\(.\\|\n\\)*\\$FlowIgnore
+suppress_type=$FlowFixMe
