@@ -47,7 +47,7 @@ gulp.task('webpack', function (callback) {
                     use: [{
                         loader: 'babel-loader',
                         options: {
-                            cacheDirectory: true // WARNING: can cause babel-loader errors
+                            // cacheDirectory: true // WARNING: can cause babel-loader errors
                         }
                     }, {
                         loader: 'eslint-loader',

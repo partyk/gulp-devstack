@@ -20,10 +20,10 @@ let bbb = {
     }
 };
 
-console.log(aaa, bbb);
+console.log(aaa, bbb, 'aaa');
 
 function square(n: string): string {
     return n;
 }
 
-square('2');
+square(2);

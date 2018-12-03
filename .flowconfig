@@ -1,7 +1,9 @@
 [ignore]
-<PROJECT_ROOT>/webpack/info/*
 <PROJECT_ROOT>/dist
 <PROJECT_ROOT>/node_modules
+<PROJECT_ROOT>/gulp
+<PROJECT_ROOT>/bower_components
+<PROJECT_ROOT>/temp
 
 [include]
 ./app/**/*
