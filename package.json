@@ -45,6 +45,7 @@
     "async": "^2.6.1",
     "autoprefixer": "^9.3.1",
     "babel-loader": "^8.0.2",
+    "babel-plugin-loop-optimizer": "^1.4.1",
     "beeper": "^1.1.1",
     "better-console": "^1.0.1",
     "bower": "^1.8.4",
