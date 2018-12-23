@@ -24,7 +24,8 @@ gulp.task('iconfont', (callback) => {
         fontName: fontName,
         path: config.app.fonts.root + 'iconsvg/less/_templateFont.less',
         targetPath: 'fontIcons.less',
-        fontPath: config.publicPath.fonts.root + 'icon/'
+        fontPath: config.publicPath.fonts.root + 'icon/',
+        cacheBuster: Math.random().toString(36).substring(2, 15)
     };
 
     const src = config.app.fonts.root + 'iconsvg/*.svg';
