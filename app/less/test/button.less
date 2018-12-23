@@ -1,0 +1,26 @@
+.btn {
+    display: inline-block;
+    line-height:1.33em;
+    padding:0.38em 1em;
+    margin-bottom: 10px;
+    font-size:21px;
+    text-decoration: none;
+    color:#FFF;
+    background-color:#cc517a;
+    border:1px solid #cc517a;
+    border-radius:0.25em;
+
+    @media (min-width: 768px) {
+        &:hover {
+            color:#FFF;
+            background-color: darken(#cc517a, 10%);
+            text-decoration: none;
+        }
+    }
+
+    &.btn-disabled {
+        border-color: #cdf3ff;
+        background-color: #cdf3ff;
+        cursor: default;
+    }
+}

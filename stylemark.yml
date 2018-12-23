@@ -1,0 +1,28 @@
+name: Gulp DevStack
+
+assets:
+  - app/less
+
+theme:
+  logo: app/images/gulp.png
+
+  sidebar:
+    background: "#3b2a55"
+    textColor: "#fff"
+
+examples:
+  css:
+    - dist/css/test-less.css
+  doctypeTag: <!DOCTYPE HTML>
+  htmlTag: <html id="acme">
+  bodyTag: <body class="acme-body">
+
+  headHtml: |
+    <script>
+        window.disableRouting = true;
+    </script>
+
+  bodyHtml: |
+    <div style="padding: 20px">
+        {html}
+    </div>

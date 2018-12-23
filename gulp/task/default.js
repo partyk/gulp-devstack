@@ -18,7 +18,10 @@ gulp.task('default',
             gulp.series('extendsjs'),
             gulp.series('webpack')
         ),
-        'watch',
+        gulp.parallel(
+            'stylemark',
+            'watch'
+        ),
         (callback) => {
             callback();
             if (isProduction()) {
