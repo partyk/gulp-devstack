@@ -3,3 +3,4 @@ dist/
 .idea/workspace.xml
 bower_components/
 temp/
+guide

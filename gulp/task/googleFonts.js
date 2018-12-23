@@ -6,6 +6,10 @@ const plugins = require('gulp-load-plugins');
 
 const $ = plugins();
 
+const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
 const streamGoogleFont = (src, dist, options, callback) => {
     options = {
         ...{
@@ -32,8 +36,25 @@ const streamGoogleFont = (src, dist, options, callback) => {
         });
 };
 
-const src = config.app.fonts.root + 'googleFonts/fonts.list';
+const typeFonts = ['woff', 'woff2', 'svg', 'eot', 'ttf'];
+const srcPath = config.app.fonts.root + 'googleFonts/';
+const srcName = [
+    'fonts'
+];
 const dist = config.dist.fonts.root;
+
+const callFunctions = [];
+
+srcName.forEach((name) => {
+    typeFonts.forEach((format) => {
+        callFunctions.push((callback) => {
+            streamGoogleFont(srcPath + srcName + '.list', dist, {
+                cssFilename: name + capitalizeFirstLetter(format) + '.css',
+                format: format
+            }, callback);
+        });
+    });
+});
 
 gulp.task('googleFonts', gulp.series(
     (callback) => {
@@ -41,36 +62,7 @@ gulp.task('googleFonts', gulp.series(
         callback();
     },
     gulp.parallel(
-        (callback) => {
-            streamGoogleFont(src, dist, {
-                cssFilename: 'fontsWoff.css',
-                format: 'woff'
-            }, callback);
-        },
-        (callback) => {
-            streamGoogleFont(src, dist, {
-                cssFilename: 'fontsWoff2.css',
-                format: 'woff2'
-            }, callback);
-        },
-        (callback) => {
-            streamGoogleFont(src, dist, {
-                cssFilename: 'fontsSvg.css',
-                format: 'svg'
-            }, callback);
-        },
-        (callback) => {
-            streamGoogleFont(src, dist, {
-                cssFilename: 'fontsEot.css',
-                format: 'eot'
-            }, callback);
-        },
-        (callback) => {
-            streamGoogleFont(src, dist, {
-                cssFilename: 'fontsTtf.css',
-                format: 'ttf'
-            }, callback);
-        }
+        ...callFunctions
     ),
     (callback) => {
         console.info(`Google fonts modify urls`);
