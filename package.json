@@ -81,6 +81,7 @@
     "gulp-sass": "^4.0.2",
     "gulp-shell": "^0.6.5",
     "gulp-sourcemaps": "^2.6.3",
+    "gulp-svg2png": "^2.0.2",
     "gulp-uglify": "^3.0.1",
     "imagemin-jpegoptim": "^5.2.0",
     "imagemin-pngquant": "6.0.0",
