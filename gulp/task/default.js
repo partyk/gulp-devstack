@@ -13,7 +13,7 @@ gulp.registry(hub);
 gulp.task('default',
     gulp.series('clean', 'download',
         gulp.parallel(
-            gulp.series('svg2png', 'imagemin'),
+            gulp.series('svg2png', 'imagemin', 'webp'),
             gulp.series('bowerfix', 'iconfont', 'less', 'sass'),
             gulp.series('extendsjs'),
             gulp.series('webpack')
@@ -47,5 +47,5 @@ gulp.task('watch', (callback) => {
     gulp.watch([...config.optionsJs.extends], gulp.parallel('extendsjs'));
 
     // images
-    gulp.watch(config.app.images.root + '**/*.{png,jpg,gif,svg,ico}', gulp.parallel('imagemin'));
+    gulp.watch(config.app.images.root + '**/*.{png,jpg,gif,svg,ico}', gulp.series(/*'svg2png',*/ 'imagemin'/*, 'webp'*/));
 });
