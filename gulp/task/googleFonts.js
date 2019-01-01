@@ -52,7 +52,7 @@ glob.sync(src).forEach(file => {
             streamGoogleFont(file, dist, {
                 cssFilename: path.basename(file, '.list') + capitalizeFirstLetter(typeFont) + '.css',
                 format: typeFont
-            }, path.basename(file, '.list') + typeFont + '.css', callback);
+            }, path.basename(file, '.list') + capitalizeFirstLetter(typeFont) + '.css', callback);
         });
     });
 });
