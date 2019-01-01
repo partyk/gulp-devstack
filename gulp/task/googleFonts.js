@@ -42,7 +42,7 @@ const streamGoogleFont = (src, dist, options, name, callback) => {
 // options
 const src = config.app.fonts.root + 'googleFonts/*.list';
 const dist = config.dist.fonts.root;
-const typeFonts = ['woff', 'woff2', 'svg', 'ttf'];
+const typeFonts = ['woff', 'woff2', 'svg', 'eot', 'ttf'];
 const args = [];
 
 // array args with a function where is callback function for creating google fonts name and type
