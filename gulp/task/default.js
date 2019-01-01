@@ -11,9 +11,9 @@ gulp.registry(hub);
 
 // default task
 gulp.task('default',
-    gulp.series('clean', 'download',
+    gulp.series('clean', 'download', /* 'googleFonts', */
         gulp.parallel(
-            gulp.series(/* 'svg2png', */ 'imagemin'/* , 'webp' */),
+            gulp.series(/* 'svg2png', */ 'imagemin'/*, 'webp' */),
             gulp.series('bowerfix', 'iconfont', 'less', 'sass'),
             gulp.series('extendsjs'),
             gulp.series('webpack')
@@ -50,5 +50,5 @@ gulp.task('watch', (callback) => {
     gulp.watch([...config.optionsJs.extends], gulp.parallel('extendsjs'));
 
     // images
-    gulp.watch(config.app.images.root + '**/*.{png,jpg,gif,svg,ico}', gulp.series(/* 'svg2png', */ 'imagemin'/* , 'webp' */));
+    gulp.watch(config.app.images.root + '**/*.{png,jpg,gif,svg,ico}', gulp.series(/*'svg2png',*/ 'imagemin'/*, 'webp'*/));
 });
