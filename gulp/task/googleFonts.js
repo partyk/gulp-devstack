@@ -9,6 +9,10 @@ const $ = plugins();
 const glob = require('glob');
 const path = require('path');
 
+const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
 const streamGoogleFont = (src, dist, options, name, callback) => {
     options = {
         ...{
@@ -46,7 +50,7 @@ glob.sync(src).forEach(file => {
     typeFonts.forEach(typeFont => {
         args.push((callback) => {
             streamGoogleFont(file, dist, {
-                cssFilename: path.basename(file, '.list') + typeFont + '.css',
+                cssFilename: path.basename(file, '.list') + capitalizeFirstLetter(typeFont) + '.css',
                 format: typeFont
             }, path.basename(file, '.list') + typeFont + '.css', callback);
         });
