@@ -6,7 +6,10 @@ const plugins = require('gulp-load-plugins');
 
 const $ = plugins();
 
-const streamGoogleFont = (src, dist, options, callback) => {
+const glob = require('glob');
+const path = require('path');
+
+const streamGoogleFont = (src, dist, options, name, callback) => {
     options = {
         ...{
             // embed: false,
@@ -16,7 +19,7 @@ const streamGoogleFont = (src, dist, options, callback) => {
         ...options
     };
 
-    console.info(`Google fonts format: ${options.format.toUpperCase()}`);
+    console.info(`Google fonts format: ${name}`);
 
     const stream = gulp.src(src);
 
@@ -32,46 +35,26 @@ const streamGoogleFont = (src, dist, options, callback) => {
         });
 };
 
-const src = config.app.fonts.root + 'googleFonts/fonts.list';
+// options
+const src = config.app.fonts.root + 'googleFonts/*.list';
 const dist = config.dist.fonts.root;
+const typeFonts = ['woff', 'woff2', 'svg', 'ttf'];
+const args = [];
+
+// array args with a function where is callback function for creating google fonts name and type
+glob.sync(src).forEach(file => {
+    typeFonts.forEach(typeFont => {
+        args.push((callback) => {
+            streamGoogleFont(file, dist, {
+                cssFilename: path.basename(file, '.list') + typeFont + '.css',
+                format: typeFont
+            }, path.basename(file, '.list') + typeFont + '.css', callback);
+        });
+    });
+});
 
 gulp.task('googleFonts', gulp.series(
-    (callback) => {
-        console.info('Google fonts');
-        callback();
-    },
-    gulp.parallel(
-        (callback) => {
-            streamGoogleFont(src, dist, {
-                cssFilename: 'fontsWoff.css',
-                format: 'woff'
-            }, callback);
-        },
-        (callback) => {
-            streamGoogleFont(src, dist, {
-                cssFilename: 'fontsWoff2.css',
-                format: 'woff2'
-            }, callback);
-        },
-        (callback) => {
-            streamGoogleFont(src, dist, {
-                cssFilename: 'fontsSvg.css',
-                format: 'svg'
-            }, callback);
-        },
-        (callback) => {
-            streamGoogleFont(src, dist, {
-                cssFilename: 'fontsEot.css',
-                format: 'eot'
-            }, callback);
-        },
-        (callback) => {
-            streamGoogleFont(src, dist, {
-                cssFilename: 'fontsTtf.css',
-                format: 'ttf'
-            }, callback);
-        }
-    ),
+    ...args,
     (callback) => {
         console.info(`Google fonts modify urls`);
 
@@ -93,5 +76,5 @@ gulp.task('googleFonts', gulp.series(
             .on('finish', () => {
                 callback();
             });
-    }
-));
+    })
+);
