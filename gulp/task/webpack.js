@@ -23,7 +23,7 @@ gulp.task('webpack', function (callback) {
             alias: {
                 'jquery': require.resolve('jquery') // kvuli pouzivani jQuery v modulech aby se nemusel vsude importovat
             },
-            extensions: ['.js', '.json'],
+            extensions: ['.tsx', '.ts', '.js', '.json'],
             modules: [
                 config.basePath.nodeModule,
                 config.basePath.bowerComponents
@@ -40,6 +40,11 @@ gulp.task('webpack', function (callback) {
         },
         module: {
             rules: [
+                {
+                    test: /\.ts(x)?$/,
+                    exclude: /node_modules|bower_components/,
+                    use: ['ts-loader', 'eslint-loader']
+                },
                 {
                     test: /\.js(x)?$/,
                     exclude: /node_modules|bower_components/,

@@ -2,6 +2,7 @@
 // import '@babel/polyfill';
 
 import '../module/test';
+import '../module/testTypeScript';
 
 // global.jQuery = jQuery;
 
