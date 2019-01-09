@@ -23,7 +23,7 @@ gulp.task('svg2png', (callback) => {
             pngquant()
         ]))
         .pipe(gulp.dest(dist))
-        .pipe($.webp())
+        .pipe($.webp({quality: 50}))
         .pipe(gulp.dest(dist))
         .on('finish', callback);
 });
