@@ -13,6 +13,17 @@ gulp.task('sass', (callback) => {
 
     // nastavim config pro sass stream
     const settings = {
+        sass: {
+            importer: [
+                require('node-sass-css-importer')({
+                    import_paths: [
+                        config.basePath.nodeModule,
+                        config.basePath.bowerComponents
+                    ]
+                })
+            ],
+            fiber: require('fibers')
+        },
         postCssPlugins: [
             require('postcss-discard-duplicates')(),
             require('pixrem')({rootValue: config.fontSize}), // rem -> px fallback, defaultni hodnota pro vypocet je 10px
@@ -59,7 +70,7 @@ gulp.task('sass', (callback) => {
                 : $.sourcemaps.init()
         )
         // kompilace sass
-        .pipe($.sass())
+        .pipe($.sass(settings.sass)/* .on('error', $.sass.logError) */)
         // postcss
         .pipe($.postcss(settings.postCssPlugins))
         // vygeneruji sourcemaps
