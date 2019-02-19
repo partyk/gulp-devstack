@@ -11,7 +11,7 @@ gulp.registry(hub);
 
 // default task
 gulp.task('default',
-    gulp.series('clean', 'download', /* 'googleFonts', */
+    gulp.series('clean', 'download', 'googleFonts',
         gulp.parallel(
             gulp.series('svg2png', 'imagemin', 'webp'),
             gulp.series('bowerfix', 'iconfont', 'less', 'sass'),

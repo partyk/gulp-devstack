@@ -43,6 +43,20 @@ gulp.task('webpack', function (callback) {
         module: {
             rules: [
                 {
+                    enforce: 'pre',
+                    test: /\.(js(x)?|ts|tsx|vue)$/,
+                    loader: 'eslint-loader',
+                    exclude: /node_modules|bower_components/,
+                },
+                {
+                    test: /\.ts(x)?$/,
+                    exclude: /node_modules|bower_components/,
+                    loader: 'ts-loader',
+                    options: {
+                        // appendTsSuffixTo: [/\.vue$/]
+                    }
+                },
+                {
                     test: /\.vue$/,
                     loader: 'vue-loader',
                     options: {
@@ -54,17 +68,9 @@ gulp.task('webpack', function (callback) {
                     }
                 },
                 {
-                    test: /\.ts(x)?$/,
-                    exclude: /node_modules|bower_components/,
-                    loader: 'ts-loader',
-                    options: {
-                        appendTsSuffixTo: [/\.vue$/],
-                    }
-                },
-                {
                     test: /\.js(x)?$/,
                     exclude: /node_modules|bower_components/,
-                    use: ['babel-loader', 'eslint-loader']
+                    use: ['babel-loader']
                 }
             ]
         },

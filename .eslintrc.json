@@ -1,4 +1,22 @@
 {
-  "parser": "typescript-eslint-parser",
-  "extends": "@partyk/eslint-config-standard"
+  "extends": [
+    "@partyk/eslint-config-standard",
+    "plugin:vue/recommended"
+  ],
+  "plugins": [
+    "vue"
+  ],
+  "parserOptions": {
+    "parser": "babel-eslint",
+    "sourceType": "module"
+  },
+  "rules": {
+    "vue/html-indent": [2, 4, {
+      "attribute": 1,
+      "baseIndent": 1,
+      "closeBracket": 0,
+      "alignAttributesVertically": true,
+      "ignores": []
+    }]
+  }
 }

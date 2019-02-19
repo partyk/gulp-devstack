@@ -35,7 +35,7 @@ const streamGoogleFont = (src, dist, options, name, callback) => {
         .pipe($.googleWebfonts(options))
         .pipe(gulp.dest(dist))
         .on('finish', () => {
-            callback();
+            setTimeout(callback, 250); // delay 250 ms for fix problem with fast request to google
         });
 };
 
