@@ -13,7 +13,7 @@ gulp.registry(hub);
 gulp.task('default',
     gulp.series('clean', 'download', /* 'googleFonts', */
         gulp.parallel(
-            gulp.series(/* 'svg2png', */ 'imagemin'/*, 'webp' */),
+            gulp.series('svg2png', 'imagemin', 'webp'),
             gulp.series('bowerfix', 'iconfont', 'less', 'sass'),
             gulp.series('extendsjs'),
             gulp.series('webpack')

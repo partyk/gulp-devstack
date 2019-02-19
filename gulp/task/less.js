@@ -16,7 +16,10 @@ gulp.task('less', (callback) => {
         postCssPlugins: [
             require('postcss-discard-duplicates')(),
             require('pixrem')({rootValue: config.fontSize}), // rem -> px fallback, defaultni hodnota pro vypocet je 10px
-            require('autoprefixer')({browsers: config.browser})// , // pridani prefixu
+            require('autoprefixer')({
+                grid: true,
+                browsers: config.browser
+            })// , // pridani prefixu
             // require('postcss-will-change')(),
             // require('postcss-color-rgba-fallback')(),
             // require('postcss-opacity')(),

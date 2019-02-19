@@ -60,7 +60,7 @@ let app = {
     scripts: {
         root: basePath.app + dirName.scripts + '/',
         src: basePath.app + dirName.scripts + '/' + dirName.src + '/',
-        extends: basePath.app + dirName.scripts  + '/' + dirName.src + '/' + dirName.extends + '/',
+        extends: basePath.app + dirName.scripts + '/' + dirName.src + '/' + dirName.extends + '/',
         static: basePath.app + dirName.scripts + '/' + dirName.static + '/',
     },
     images: {
@@ -94,17 +94,17 @@ let dist = {
 };
 
 let webpack = {
-	stats: {
-		colors: true,
-		hash: false,
-		timings: true,
-		assets: true,
-		chunks: false,
-		chunkModules: false,
-		modules: false,
-		children: true,
-		version: false,
-	},
+    stats: {
+        colors: true,
+        hash: false,
+        timings: true,
+        assets: true,
+        chunks: false,
+        chunkModules: false,
+        modules: false,
+        children: true,
+        version: false,
+    },
 };
 
 //podpora prohlizece

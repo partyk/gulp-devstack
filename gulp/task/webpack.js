@@ -7,6 +7,7 @@ const webpack = require('webpack');
 const gulp = require('gulp');
 const plugins = require('gulp-load-plugins');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const { VueLoaderPlugin } = require('vue-loader');
 
 const $ = plugins();
 
@@ -21,9 +22,10 @@ gulp.task('webpack', function (callback) {
         },
         resolve: {
             alias: {
-                'jquery': require.resolve('jquery') // kvuli pouzivani jQuery v modulech aby se nemusel vsude importovat
+                'jquery': require.resolve('jquery'), // kvuli pouzivani jQuery v modulech aby se nemusel vsude importovat
+                'vue$': 'vue/dist/vue.esm' // alias for vuejs
             },
-            extensions: ['.js', '.json'],
+            extensions: ['.vue', '.tsx', '.ts', '.js', '.json'],
             modules: [
                 config.basePath.nodeModule,
                 config.basePath.bowerComponents
@@ -41,13 +43,34 @@ gulp.task('webpack', function (callback) {
         module: {
             rules: [
                 {
+                    test: /\.vue$/,
+                    loader: 'vue-loader',
+                    options: {
+                        loaders: {
+                            'js': 'babel-loader' /*,
+                            'scss': 'vue-style-loader!css-loader!sass-loader',
+                            'sass': 'vue-style-loader!css-loader!sass-loader?indentedSyntax' */
+                        }
+                    }
+                },
+                {
+                    test: /\.ts(x)?$/,
+                    exclude: /node_modules|bower_components/,
+                    loader: 'ts-loader',
+                    options: {
+                        appendTsSuffixTo: [/\.vue$/],
+                    }
+                },
+                {
                     test: /\.js(x)?$/,
                     exclude: /node_modules|bower_components/,
                     use: ['babel-loader', 'eslint-loader']
                 }
             ]
         },
-        plugins: [],
+        plugins: [
+            new VueLoaderPlugin()
+        ],
         profile: true,
         watch: !isProduction(),
         watchOptions: {

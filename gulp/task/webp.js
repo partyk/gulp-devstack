@@ -16,7 +16,7 @@ gulp.task('webp', (callback) => {
     // stream
     const stream = gulp.src(src);
     stream
-        .pipe($.webp())
+        .pipe($.webp({quality: 50}))
         .pipe(gulp.dest(dist))
         .on('finish', callback);
 });
