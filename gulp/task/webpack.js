@@ -7,7 +7,8 @@ const webpack = require('webpack');
 const gulp = require('gulp');
 const plugins = require('gulp-load-plugins');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const { VueLoaderPlugin } = require('vue-loader');
+const {VueLoaderPlugin} = require('vue-loader');
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 
 const $ = plugins();
 
@@ -19,6 +20,9 @@ gulp.task('webpack', function (callback) {
         mode: isProduction() ? 'production' : 'development',
         performance: {
             // hints: false // pokud se bude buildovat vetsi soubor nez 250kB, tak lze potlacit hlasku false
+        },
+        devServer: {
+            quiet: true
         },
         resolve: {
             alias: {
@@ -75,6 +79,9 @@ gulp.task('webpack', function (callback) {
             ]
         },
         plugins: [
+            new FriendlyErrorsWebpackPlugin({
+                clearConsole: true
+            }),
             new VueLoaderPlugin()
         ],
         profile: true,
@@ -118,7 +125,7 @@ gulp.task('webpack', function (callback) {
         if (error) {
             onError(error);
         } else if (errors.length > 0) {
-            onError(errors.toString());
+            // onError(errors.toString());
         } else if (warnings.length > 0) {
             onError(warnings.toString());
         } else {
