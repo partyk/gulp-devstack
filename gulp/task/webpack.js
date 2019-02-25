@@ -6,6 +6,7 @@ const path = require('path');
 const webpack = require('webpack');
 const gulp = require('gulp');
 const plugins = require('gulp-load-plugins');
+/* webpack plugins */
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const {VueLoaderPlugin} = require('vue-loader');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
@@ -53,11 +54,16 @@ gulp.task('webpack', function (callback) {
                     exclude: /node_modules|bower_components/,
                 },
                 {
+                    enforce: 'pre',
+                    test: /\.js$/,
+                    use: ['source-map-loader']
+                },
+                {
                     test: /\.ts(x)?$/,
                     exclude: /node_modules|bower_components/,
                     loader: 'ts-loader',
                     options: {
-                        // appendTsSuffixTo: [/\.vue$/]
+                        appendTsSuffixTo: [/\.vue$/]
                     }
                 },
                 {
@@ -125,6 +131,7 @@ gulp.task('webpack', function (callback) {
         if (error) {
             onError(error);
         } else if (errors.length > 0) {
+            // this directive was disabled because webpack used FriendlyErrorsWebpackPlugin for the error message
             // onError(errors.toString());
         } else if (warnings.length > 0) {
             onError(warnings.toString());
