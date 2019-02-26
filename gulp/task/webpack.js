@@ -1,15 +1,18 @@
 const config = require('./../helpers/getConfig');
 const isProduction = require('./../helpers/isProduction');
 const console = require('better-console');
+const argv = require('minimist')(process.argv.slice(2));
 
 const path = require('path');
 const webpack = require('webpack');
 const gulp = require('gulp');
 const plugins = require('gulp-load-plugins');
+
 /* webpack plugins */
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const {VueLoaderPlugin} = require('vue-loader');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const $ = plugins();
 
@@ -106,12 +109,15 @@ gulp.task('webpack', function (callback) {
         $: 'jquery',
         jQuery: 'jquery'
     }));
-
+    // plugin are run when is switch
+    if (argv.analyzer) {
+        settings.plugins.push(new BundleAnalyzerPlugin());
+    }
+    // for peoduction
     if (isProduction()) {
         settings.plugins.push(new UglifyJsPlugin({
             uglifyOptions: config.optionsUglify
         }));
-
         settings.plugins.push(new webpack.optimize.ModuleConcatenationPlugin());
     }
 
