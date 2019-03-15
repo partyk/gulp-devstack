@@ -13,6 +13,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const {VueLoaderPlugin} = require('vue-loader');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
 
 const $ = plugins();
 
@@ -54,7 +55,7 @@ gulp.task('webpack', function (callback) {
                     enforce: 'pre',
                     test: /\.(js(x)?|ts|tsx|vue)$/,
                     loader: 'eslint-loader',
-                    exclude: /node_modules|bower_components/,
+                    exclude: /node_modules|bower_components/
                 },
                 {
                     enforce: 'pre',
@@ -91,7 +92,8 @@ gulp.task('webpack', function (callback) {
             new FriendlyErrorsWebpackPlugin({
                 clearConsole: true
             }),
-            new VueLoaderPlugin()
+            new VueLoaderPlugin(),
+            new DuplicatePackageCheckerPlugin()
         ],
         profile: true,
         watch: !isProduction(),
