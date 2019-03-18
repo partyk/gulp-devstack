@@ -14,6 +14,7 @@ const {VueLoaderPlugin} = require('vue-loader');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
+const WebpackMonitor = require('webpack-monitor');
 
 const $ = plugins();
 
@@ -114,6 +115,15 @@ gulp.task('webpack', function (callback) {
     // plugin are run when is switch
     if (argv.analyzer) {
         settings.plugins.push(new BundleAnalyzerPlugin());
+    }
+    if (argv.monitor) {
+        settings.plugins.push(new WebpackMonitor({
+            capture: true, // -> default 'true'
+            target: '../monitor/stats.json', // default -> '../monitor/stats.json'
+            launch: true, // -> default 'false'
+            port: 3030, // default -> 8081
+            excludeSourceMaps: true // default 'true'
+        }));
     }
     // for peoduction
     if (isProduction()) {
