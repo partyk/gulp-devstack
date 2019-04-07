@@ -22,7 +22,7 @@ gulp.task('iconfont', (callback) => {
 
     const optionsCss = {
         fontName: fontName,
-        path: config.app.fonts.root + 'iconsvg/less/_templateFont.less',
+        path: config.basePath.nodeModule + 'gulp-iconfont-css/templates/_icons.less',
         targetPath: 'fontIcons.less',
         fontPath: config.publicPath.fonts.root + 'icon/',
         cacheBuster: Math.random().toString(36).substring(2, 15)
