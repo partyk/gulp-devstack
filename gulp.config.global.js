@@ -81,7 +81,7 @@ let dist = {
     scripts: {
         root: basePath.dist + dirName.scripts + '/',
         extends: basePath.dist + dirName.scripts + '/' + dirName.extends + '/',
-        static: basePath.app + dirName.scripts + '/' + dirName.static + '/',
+        static: basePath.dist + dirName.scripts + '/' + dirName.static + '/',
     },
     images: {
         root: basePath.dist + dirName.images + '/',
@@ -141,13 +141,29 @@ let optionsUglify = {
     unsafe: false, */
 };
 
-let optionsJs = {
+const optionsJs = {
     extends: [
         app.scripts.extends + '**/*.js'
-    ]
+    ],
+    concat: {
+        test: {
+            dist: dist.scripts.static,
+            src: [
+                app.scripts.root + 'concat/test.js',
+                app.scripts.root + 'concat/test2.js'
+            ]
+        },
+        test2: {
+            dist: dist.scripts.static,
+            src: [
+                app.scripts.root + 'concat/test.js',
+                app.scripts.root + 'concat/test3.js'
+            ]
+        }
+    }
 };
 
-const downloadFiles = ["https://1gr.cz/css/idn3/reklama.css"];
+const downloadFiles = ['https://1gr.cz/css/idn3/reklama.css'];
 
 module.exports = {
     optionsApp: optionsApp,

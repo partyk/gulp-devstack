@@ -15,3 +15,9 @@ OR
 
 1. ```npm run develop``` – for development.
 2. ```npm run production``` – for production.
+
+## Extra switch example
+
+--doc // generate CSS documentation
+--analyzer // run Webpack Bundle Analyzer https://www.npmjs.com/package/webpack-bundle-analyzer
+--monitor // run Webpack Monitor http://webpackmonitor.com/

@@ -7,18 +7,13 @@ const plugins = require('gulp-load-plugins');
 
 const $ = plugins();
 
-gulp.task('dependencyJs', (callBack) => {
-    console.info('Concat > ' + config.concatJs.dependencyJs.name);
+const args = [];
 
-    if (config.concatJs.dependencyJs.files.length === 0) {
-        console.warn('Concat dependency warn -> Mising files for concat!');
-        callBack();
-        return;
-    }
+const streamConcatJS = (src, dist, name, callBack) => {
 
-    const dist = config.dist.scripts.static + config.concatJs.dependencyJs.name;
+    console.log(src, dist, name, callBack);
 
-    const stream = gulp.src(config.concatJs.dependencyJs.files);
+    const stream = gulp.src(src);
 
     stream
     // nastavim plumber a v pripade chyby volam callback onError
@@ -33,7 +28,7 @@ gulp.task('dependencyJs', (callBack) => {
                 : $.sourcemaps.init()
         )
         .pipe($.concat({
-            path: dist,
+            path: name + '.js',
             stat: {
                 // mode: 0666
             }
@@ -46,5 +41,13 @@ gulp.task('dependencyJs', (callBack) => {
         )
         // vygeneruji soubor
         .pipe(gulp.dest(dist))
-        .on('finish', callBack);
+        .on('finish', () => callBack());
+};
+
+Object.keys(config.optionsJs.concat).forEach(item => {
+    args.push((callBack) => {
+        streamConcatJS(config.optionsJs.concat[item].src, config.optionsJs.concat[item].dist, item, callBack);
+    });
 });
+
+gulp.task('concatJs', gulp.series(...args));

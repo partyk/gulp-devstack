@@ -13,6 +13,8 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const {VueLoaderPlugin} = require('vue-loader');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
+const WebpackMonitor = require('webpack-monitor');
 
 const $ = plugins();
 
@@ -54,7 +56,7 @@ gulp.task('webpack', function (callback) {
                     enforce: 'pre',
                     test: /\.(js(x)?|ts|tsx|vue)$/,
                     loader: 'eslint-loader',
-                    exclude: /node_modules|bower_components/,
+                    exclude: /node_modules|bower_components/
                 },
                 {
                     enforce: 'pre',
@@ -95,7 +97,8 @@ gulp.task('webpack', function (callback) {
             new FriendlyErrorsWebpackPlugin({
                 clearConsole: true
             }),
-            new VueLoaderPlugin()
+            new VueLoaderPlugin(),
+            new DuplicatePackageCheckerPlugin()
         ],
         profile: true,
         watch: !isProduction(),
@@ -116,6 +119,15 @@ gulp.task('webpack', function (callback) {
     // plugin are run when is switch
     if (argv.analyzer) {
         settings.plugins.push(new BundleAnalyzerPlugin());
+    }
+    if (argv.monitor) {
+        settings.plugins.push(new WebpackMonitor({
+            capture: true, // -> default 'true'
+            target: '../monitor/stats.json', // default -> '../monitor/stats.json'
+            launch: true, // -> default 'false'
+            port: 3030, // default -> 8081
+            excludeSourceMaps: true // default 'true'
+        }));
     }
     // for peoduction
     if (isProduction()) {
