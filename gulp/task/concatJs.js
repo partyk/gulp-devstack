@@ -11,8 +11,6 @@ const args = [];
 
 const streamConcatJS = (src, dist, name, callBack) => {
 
-    console.log(src, dist, name, callBack);
-
     const stream = gulp.src(src);
 
     stream
@@ -50,4 +48,4 @@ Object.keys(config.optionsJs.concat).forEach(item => {
     });
 });
 
-gulp.task('concatJs', gulp.series(...args));
+Object.keys(config.optionsJs.concat).length > 0 ? gulp.task('concatJs', gulp.series(...args)) : gulp.task('concatJs', (callBack) => callBack());
