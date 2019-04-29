@@ -40,7 +40,6 @@
     "@babel/core": "^7.3.3",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/plugin-syntax-object-rest-spread": "^7.2.0",
-    "@babel/polyfill": "^7.2.5",
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-typescript": "^7.3.3",
     "@babel/register": "^7.0.0",
@@ -113,6 +112,7 @@
     "webpack-bundle-analyzer": "^3.0.4"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.4.4",
     "jquery": "^3.3.1",
     "vue": "^2.6.6"
   }
