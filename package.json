@@ -47,6 +47,7 @@
     "autoprefixer": "^9.5.1",
     "babel-loader": "^8.0.5",
     "babel-plugin-loop-optimizer": "^1.4.1",
+    "babel-plugin-transform-es2015-for-of": "^6.23.0",
     "beeper": "^1.1.1",
     "better-console": "^1.0.1",
     "bower": "^1.8.8",

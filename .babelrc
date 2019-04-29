@@ -20,6 +20,7 @@
     "plugins": [
         "@babel/plugin-syntax-object-rest-spread",
         "@babel/plugin-syntax-dynamic-import",
-        "babel-plugin-loop-optimizer"
+        "babel-plugin-loop-optimizer",
+        "transform-es2015-for-of"
     ]
 }
