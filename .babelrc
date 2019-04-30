@@ -23,6 +23,6 @@
         ["@babel/plugin-transform-for-of", {
             "loose": true
         }],
-        "transform-es2015-for-of"
+        "babel-plugin-loop-optimizer"
     ]
 }
