@@ -3,8 +3,8 @@ const console = require('better-console');
 
 const gulp = require('gulp');
 const imagemin = require('gulp-imagemin');
-const jpegoptim = require('imagemin-jpegoptim');
-const pngquant = require('imagemin-pngquant');
+const imageminMozjpeg = require('imagemin-mozjpeg');
+const imageminPngquant = require('imagemin-pngquant');
 
 const streamImageMin = (name, src, dist, callback) => {
     console.info(`${name} > minifying of images`);
@@ -17,12 +17,31 @@ const streamImageMin = (name, src, dist, callback) => {
             process.exit(1); // eslint-disable-line
         })
         .pipe(imagemin([
-            jpegoptim({
+            // Lossless Plugin
+            imagemin.gifsicle({
+                interlaced: true
+            }),
+            /* imagemin.mozjpeg({
                 progressive: true
             }),
-            pngquant(),
-            imagemin.gifsicle(),
-            imagemin.svgo()
+            imagemin.optipng({
+                optimizationLevel: 3
+            }), */
+            // Lossy Plugin
+            imageminMozjpeg({
+                progressive: true,
+                quality: 85
+            }),
+            imageminPngquant({
+                speed: 1,
+                quality: [0.5, 0.9]
+            }),
+            imagemin.svgo({
+                plugins: [
+                    {removeViewBox: true} /*,
+                    {cleanupIDs: false} */
+                ]
+            })
         ]))
         .pipe(gulp.dest(dist))
         .on('finish', callback);

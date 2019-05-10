@@ -93,7 +93,7 @@
     "gulp-svg2png": "^2.0.2",
     "gulp-uglify": "^3.0.2",
     "gulp-webp": "^4.0.0",
-    "imagemin-jpegoptim": "^6.0.0",
+    "imagemin-mozjpeg": "^8.0.0",
     "imagemin-pngquant": "7.0.0",
     "imagemin-webp": "^5.0.0",
     "minimist": "^1.2.0",
