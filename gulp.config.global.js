@@ -101,9 +101,6 @@ let webpack = {
     }
 };
 
-//podpora prohlizece
-let browser = ['> 2% in CZ', 'last 3 version', 'iOs >= 7', 'Explorer >= 10'];
-
 //velikost vychoziho pisma
 let fontSize = 10;
 
@@ -167,7 +164,6 @@ module.exports = {
     dist: dist,
     dirName: dirName,
     webpack: webpack,
-    browser: browser,
     fontSize: fontSize,
     optionsUglify: optionsUglify,
     optionsJs: optionsJs,
