@@ -2,8 +2,14 @@
     "presets": [
         ["@babel/env", {
             "targets": {
+                "chrome": "48",
+                "ie": "10",
+                "firefox": "52",
+                "edge": "14",
+                "opera": "51",
+                "safari": "9",
                 "browsers": [
-                    "> 1% in CZ",
+                    "> 0.5% in CZ",
                     "Explorer >= 10",
                     "iOs >= 9",
                     "last 3 versions"
@@ -14,6 +20,9 @@
     "plugins": [
         "@babel/plugin-syntax-object-rest-spread",
         "@babel/plugin-syntax-dynamic-import",
+        ["@babel/plugin-transform-for-of", {
+            "loose": true
+        }],
         "babel-plugin-loop-optimizer"
     ]
 }

@@ -5,8 +5,8 @@ const gulp = require('gulp');
 const plugins = require('gulp-load-plugins');
 
 const imagemin = require('gulp-imagemin');
-const jpegoptim = require('imagemin-jpegoptim');
-const pngquant = require('imagemin-pngquant');
+const imageminMozjpeg = require('imagemin-mozjpeg');
+const imageminPngquant = require('imagemin-pngquant');
 
 const $ = plugins();
 
@@ -55,12 +55,31 @@ gulp.task('bowerfix', gulp.series(
                 throw new Error(e);
             })
             .pipe(imagemin([
-                jpegoptim({
+                // Lossless Plugin
+                imagemin.gifsicle({
+                    interlaced: true
+                }),
+                /* imagemin.mozjpeg({
                     progressive: true
                 }),
-                pngquant(),
-                imagemin.gifsicle(),
-                imagemin.svgo()
+                imagemin.optipng({
+                    optimizationLevel: 3
+                }), */
+                // Lossy Plugin
+                imageminMozjpeg({
+                    progressive: true,
+                    quality: 85
+                }),
+                imageminPngquant({
+                    speed: 1,
+                    quality: [0.5, 0.9]
+                }),
+                imagemin.svgo({
+                    plugins: [
+                        {removeViewBox: true} /*,
+                    {cleanupIDs: false} */
+                    ]
+                })
             ]))
             .pipe($.rename({dirname: ''})) // remove a folder structure in stream
             .pipe(gulp.dest(config.dist.images.extends))

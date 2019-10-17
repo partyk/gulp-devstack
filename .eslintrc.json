@@ -1,6 +1,6 @@
 {
   "extends": [
-    "@partyk/eslint-config-standard",
+    "eslint-config-standart-partyk",
     "plugin:vue/strongly-recommended"
   ],
   "plugins": [
