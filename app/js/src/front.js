@@ -13,17 +13,17 @@ import App from '../module/Hello';
 
 // global.jQuery = jQuery;
 
-let aaa = Object.assign({}, {
-    'aaa': 'aaa',
-    'bbb': 'aaaa'
+const aaa = Object.assign({}, {
+    aaa: 'aaa',
+    bbb: 'aaaa'
 });
 
-let bbb = {
+const bbb = {
     ...{
-        'aaa': 'aaa'
+        aaa: 'aaa'
     },
     ...{
-        'bbb': 'aaaa'
+        bbb: 'aaaa'
     }
 };
 

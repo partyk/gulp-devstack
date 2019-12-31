@@ -3,3 +3,7 @@ const test = (num: number) => {
 };
 
 test(18);
+
+export {
+    test
+};
