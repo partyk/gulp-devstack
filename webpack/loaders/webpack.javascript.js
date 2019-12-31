@@ -3,7 +3,7 @@ const path = require('path');
 
 module.exports = ({include, exclude} = {}) => ({
     entry: {
-        main: path.resolve(config.path.src, 'js/src/index.js')
+        front: path.resolve(config.path.src, 'js/src/front.js')
     },
     output: {
         filename: 'js/[name].js',

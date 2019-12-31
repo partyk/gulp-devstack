@@ -5,7 +5,7 @@ As of Babel 7.4.0, this '@babel/polyfill' package has been deprecated in favor o
 */
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
-import Vue from 'vue'; // vue
+/* import Vue from 'vue'; // vue
 
 import '../module/test';
 import '../module/testTypeScript';
@@ -35,4 +35,4 @@ global.app = new Vue({
         message: 'Hello Vue!'
     },
     render: h => h(App)
-});
+}); */

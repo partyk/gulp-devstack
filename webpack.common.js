@@ -35,11 +35,11 @@ module.exports = merge(
             path: path.resolve(config.path.assets)
         },
         plugins: [
-            plugins.clean(),
+            // plugins.clean(),
             plugins.friendlyErrors(),
-            plugins.copy(),
-            plugins.imageMin(),
-            plugins.iconFont(),
+            // plugins.copy(),
+            // plugins.imageMin(),
+            // plugins.iconFont(),
             plugins.webpackBar(),
             plugins.duplicatePackageChecker(),
             plugins.vueLoader()
@@ -53,14 +53,13 @@ module.exports = merge(
     loaders.loadTypeScript(),
     loaders.loadVueJs(),
     loaders.loadJS(),
-    loaders.loadCss(),
-    loaders.loadScss(),
-    loaders.loadLess(),
+    // loaders.loadCss(),
+    // loaders.loadScss(),
+    // loaders.loadLess(),
     loaders.loadImage(),
     loaders.loadFonts({
         include: [
-            path.resolve(__dirname, 'src/icons'),
-            path.resolve(__dirname, 'src/fonts')
+            path.resolve(__dirname, 'app')
         ]
     })
 );
