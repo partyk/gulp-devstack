@@ -13,6 +13,7 @@ const plugins = require('./webpack/plugins/index');
 
 module.exports = merge(common, {
     mode: 'development',
+    // a complete list of "stats" setting is on https://webpack.js.org/configuration/stats/
     stats: {
         // copied from `'minimal'`
         all: false,
@@ -34,7 +35,7 @@ module.exports = merge(common, {
         ignored: /node_modules/
     },
     plugins: [
-        // plugins.friendlyErrors(),
+        plugins.friendlyErrors()// ,
         // plugins.bundleAnalyzer(),
         // plugins.dashboard()
         // plugins.browserSync()
