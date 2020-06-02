@@ -34,7 +34,7 @@ module.exports = merge(common, {
         ignored: /node_modules/
     },
     plugins: [
-        plugins.friendlyErrors(),
+        plugins.friendlyErrors()// ,
         // plugins.bundleAnalyzer(),
         // plugins.dashboard()
         // plugins.browserSync()

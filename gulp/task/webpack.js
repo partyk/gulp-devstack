@@ -13,9 +13,11 @@ const webpackProd = require('./../../webpack.prod');
 
 gulp.task('webpack', (callback) => {
     console.info('Webpack compile');
-    webpack(isProduction() ? webpackProd : webpackDev, (error, stats) => {
+    const config = isProduction() ? webpackProd : webpackDev;
+    // eslint-disable-next-line handle-callback-err
+    webpack(config, (error, stats) => {
         const jsonStats = stats.toJson();
-        if (isProduction() && jsonStats.errors) {
+        if (isProduction() && jsonStats.errors.length > 0) {
             console.error(jsonStats.errors.toString());
             process.exit(1);
         } else {
