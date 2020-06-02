@@ -26,15 +26,15 @@ module.exports = merge(common, {
         errorDetails: true
     },
     devtool: 'source-map',
-    devServer: {
+    /* devServer: {
         contentBase: './dist'
-    },
+    }, */
     watch: true,
     watchOptions: {
         ignored: /node_modules/
     },
     plugins: [
-        // plugins.friendlyErrors(),
+        plugins.friendlyErrors(),
         // plugins.bundleAnalyzer(),
         // plugins.dashboard()
         // plugins.browserSync()

@@ -6,7 +6,7 @@ const plugins = require('./webpack/plugins/index');
 global.isProduction = true;
 
 /* plugins */
-const TerserPlugin = require('terser-webpack-plugin');
+/* const TerserPlugin = require('terser-webpack-plugin');
 
 const terserOptions = {
     ecma: undefined,
@@ -22,7 +22,7 @@ const terserOptions = {
     keep_classnames: undefined,
     keep_fnames: false,
     safari10: false
-};
+}; */
 
 module.exports = merge(common, {
     mode: 'production',
