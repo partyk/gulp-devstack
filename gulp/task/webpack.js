@@ -11,7 +11,7 @@ const webpack = require('webpack');
 const webpackDev = require('./../../webpack.dev');
 const webpackProd = require('./../../webpack.prod');
 
-gulp.task('webpack', (callback) => {
+/* gulp.task('webpack', (callback) => {
     console.info('Webpack compile');
     const config = isProduction() ? webpackProd : webpackDev;
     // eslint-disable-next-line handle-callback-err
@@ -23,5 +23,21 @@ gulp.task('webpack', (callback) => {
         } else {
             callback();
         }
+    });
+}); */
+
+gulp.task('webpack', (callback) => {
+    console.info('Webpack compile');
+    const config = isProduction() ? webpackProd : webpackDev;
+    return new Promise((resolve, reject) => {
+        webpack(config, (error, stats) => {
+            if (error) {
+                return reject(error);
+            }
+            if (stats.hasErrors()) {
+                return reject(new Error(stats.compilation.errors.join('\n')));
+            }
+            resolve();
+        });
     });
 });
