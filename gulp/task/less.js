@@ -33,7 +33,14 @@ gulp.task('less', (callback) => {
     // pridam do postCssPluginy pro produkci
     if (isProduction()) {
         settings.postCssPlugins = settings.postCssPlugins.concat([
-            require('cssnano')()
+            require('cssnano')({
+                preset: ['advanced', {
+                    autoprefixer: false,
+                    discardComments: {
+                        removeAll: true
+                    }
+                }]
+            })
         ]);
     }
 
