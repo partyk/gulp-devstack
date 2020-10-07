@@ -22,7 +22,6 @@ gulp.task('sass', (callback) => {
                     ]
                 })
             ],
-            fiber: require('fibers')
         },
         postCssPlugins: [
             require('postcss-discard-duplicates')(),
